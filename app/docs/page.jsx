@@ -68,7 +68,7 @@ export default async function Docs() {
             <Section id="requirements" title="What your PC needs">
               <ul className="facts">
                 <li><b>Windows 10 or 11</b>, 64-bit. A Mac version isn't available yet.</li>
-                <li><b>About 4 GB of free disk space</b> for the app and the AI model.</li>
+                <li><b>About 6 GB of free disk space</b> for the app, Ollama and the AI models.</li>
                 <li><b>8 GB of memory</b> or more is comfortable. A graphics card (GPU) makes answers faster but isn't required.</li>
                 <li><b>Internet once</b>, for the first setup. After that, never required.</li>
               </ul>
