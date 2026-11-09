@@ -1,12 +1,7 @@
-/* ancesra ai website, from the Figma "Landing — v2 (editorial)" frame.
+/* ancesra ai website (Next.js), from the Figma "Landing — v2 (editorial)" frame.
    Desktop sizes follow the 1440px design; clamp() scales the big type down. */
 
-@font-face {
-  font-family: "Urbanist";
-  src: url("assets/fonts/urbanist.woff2") format("woff2");
-  font-weight: 100 900;
-  font-display: swap;
-}
+/* Urbanist is loaded by next/font in app/layout.jsx (--font-urbanist) */
 
 :root {
   --bg: #070707;
@@ -25,7 +20,7 @@ body {
   margin: 0;
   color: var(--text);
   background: var(--bg);
-  font: 400 15px/23px "Urbanist", system-ui, sans-serif;
+  font: 400 15px/23px var(--font-urbanist), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -62,7 +57,7 @@ p { margin: 0; }
   height: 28px;
   flex-shrink: 0;
   border-radius: 999px;
-  background: url("assets/arrow-dark.svg") center / 14px no-repeat, linear-gradient(#2a2a2a, #050505);
+  background: url("/assets/arrow-dark.svg") center / 14px no-repeat, linear-gradient(#2a2a2a, #050505);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 2px 4px rgba(0, 0, 0, .4);
   transition: transform .28s ease-out;
 }
@@ -74,7 +69,7 @@ p { margin: 0; }
   box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, .35), inset 0 -2px 2px rgba(0, 0, 0, .4), 0 6px 7px rgba(0, 0, 0, .5);
 }
 .pill.outline .pill-arrow {
-  background: url("assets/arrow-light.svg") center / 14px no-repeat, linear-gradient(#fff, #d9d3cc);
+  background: url("/assets/arrow-light.svg") center / 14px no-repeat, linear-gradient(#fff, #d9d3cc);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 2px 4px rgba(0, 0, 0, .4);
 }
 /* Hover: fill flips to coral (inverted) or white (outline), arrow slides right, coral glow */
@@ -194,7 +189,7 @@ p { margin: 0; }
 .dot { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(239, 90, 60, .9); }
 .chip-1 { left: 7.6%; top: 300px; }
 .chip-2 { left: 73.6%; top: 150px; }
-.chip-4 { left: 8.3%; top: 620px; }
+.chip-3 { left: 8.3%; top: 620px; }
 
 .offline-toggle {
   left: 7.6%;
@@ -269,6 +264,7 @@ p { margin: 0; }
   white-space: nowrap;
   color: rgba(244, 241, 238, .85);
 }
+.marquee-item { display: flex; align-items: center; gap: 28px; }
 .marquee-track i { font-style: normal; font-size: 16px; color: var(--accent); }
 @keyframes scroll { to { transform: translateX(-50%); } }
 
@@ -291,7 +287,7 @@ p { margin: 0; }
   height: 22px;
   border-radius: 999px;
   border: 1px solid rgba(244, 241, 238, .4);
-  background: url("assets/arrow-small.svg") center / 11px no-repeat;
+  background: url("/assets/arrow-small.svg") center / 11px no-repeat;
   transition: transform .28s ease-out, border-color .28s;
 }
 .more:hover .more-arrow { transform: translateX(4px); border-color: var(--accent); }
@@ -417,7 +413,7 @@ p { margin: 0; }
 /* ---------- smaller screens ---------- */
 @media (max-width: 1100px) {
   :root { --pad: 40px; }
-  .chip-1, .chip-4, .offline-toggle { display: none; }
+  .chip-1, .chip-3, .offline-toggle { display: none; }
   .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .card-chat { grid-column: span 2; }
   .card-code, .card-files, .card-debug, .card-private { grid-column: span 1; min-height: 440px; }
