@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ancesra ai — private AI that works offline</title>
+  <meta name="description" content="ancesra is a free AI assistant that runs 100% on your laptop. Chat, code, debug and ask your own files, with no internet, no account and no cloud.">
+  <meta name="theme-color" content="#070707">
+  <meta property="og:title" content="ancesra ai — no signal. no cloud. no problem.">
+  <meta property="og:description" content="A free AI assistant that runs 100% on your laptop. Works offline, nothing leaves your machine.">
+  <meta property="og:image" content="assets/logo.png">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preload" href="assets/fonts/urbanist.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!--
+    Links to update in one place:
+      - Download: every element with data-link="download" (main.js sets the URL from LINKS)
+      - founder / contribute: see LINKS in main.js
+  -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="top">
+    <a class="brand" href="#top">ancesra.</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#top">home</a>
+      <a href="#about">about</a>
+      <a href="#features">docs</a>
+      <a href="#about" data-link="founder">founder</a>
+      <a href="#" data-link="contribute">contribute</a>
+    </nav>
+    <a class="pill" data-link="download" href="#">download<span class="pill-arrow" aria-hidden="true"></span></a>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-art" aria-hidden="true">
+        <img class="halo" src="assets/halo.svg" alt="">
+        <div class="blob blob-hero"></div>
+      </div>
+
+      <h1 class="headline" id="hero-title">
+        <span>no signal.</span>
+        <span class="center">no cloud.</span>
+        <span class="accent right">no problem.</span>
+      </h1>
+
+      <ul class="chips" aria-label="Things you can ask">
+        <li class="chip chip-1"><span class="dot"></span>fix my word_count bug</li>
+        <li class="chip chip-2"><span class="dot"></span>when's my midterm?</li>
+        <li class="chip chip-4"><span class="dot"></span>explain hash maps, fast</li>
+      </ul>
+
+      <button class="offline-toggle" type="button" role="switch" aria-checked="true" aria-label="Offline mode">
+        <span class="track"><span class="knob"></span></span>
+        <span class="toggle-text"><strong>offline mode</strong><small>on · always</small></span>
+      </button>
+
+      <div class="hero-bottom">
+        <p>stuck in traffic. power cut. hostel wifi dead again. still need ai? ancesra runs 100% on your laptop. ask it anything, get your code fixed, read your own notes. nothing ever leaves your machine. fr.</p>
+        <div class="buttons">
+          <a class="pill" data-link="download" href="#">get it for windows<span class="pill-arrow" aria-hidden="true"></span></a>
+          <a class="pill outline" href="#features">how it works<span class="pill-arrow" aria-hidden="true"></span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee" aria-label="works offline, zero cloud, free forever, your files stay yours, no account, runs on your laptop">
+      <div class="marquee-track" aria-hidden="true">
+        <span>works offline</span><i>✦</i><span>zero cloud</span><i>✦</i><span>free forever</span><i>✦</i>
+        <span>your files stay yours</span><i>✦</i><span>no account</span><i>✦</i><span>runs on your laptop</span><i>✦</i>
+        <span>works offline</span><i>✦</i><span>zero cloud</span><i>✦</i><span>free forever</span><i>✦</i>
+        <span>your files stay yours</span><i>✦</i><span>no account</span><i>✦</i><span>runs on your laptop</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- The vibe -->
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <h2 class="section-title" id="about-title">the vibe</h2>
+      <div class="about-row">
+        <div class="about-copy">
+          <p>ancesra is the ai that doesn't need the internet. one dev, one laptop, zero servers. built for 2am study sessions, trains with no bars, and the simple idea that your data should just… stay yours. install once with wifi on. then unplug. it keeps going.</p>
+          <a class="more" href="#features">more<span class="more-arrow" aria-hidden="true"></span></a>
+        </div>
+        <dl class="stats">
+          <div><dt>100%</dt><dd>offline, always</dd></div>
+          <div><dt>0</dt><dd>bytes sent. ever.</dd></div>
+          <div><dt>1</dt><dd>download. that's it.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- What it does -->
+    <section class="section features" id="features" aria-labelledby="features-title">
+      <h2 class="section-title" id="features-title">what it does</h2>
+      <div class="features-intro">
+        <p>three modes plus your own files. all of it runs on your computer, even in airplane mode. when it uses one of your docs it tells you the file and the page. no guessing.</p>
+        <a class="pill" data-link="download" href="#">download<span class="pill-arrow" aria-hidden="true"></span></a>
+      </div>
+
+      <div class="bento">
+        <article class="card card-chat">
+          <h3><span class="num">01</span>chat</h3>
+          <p>ask literally anything. answer first, key points after, zero yapping. it knows 2024–2026 stuff too, with sources, offline.</p>
+          <img class="window" src="assets/preview-chat.png" width="812" height="330" alt="Ancesra chat answering “Why is Python so popular?” with key points and a Wikipedia source" loading="lazy">
+        </article>
+        <article class="card card-code">
+          <h3><span class="num">02</span>code</h3>
+          <p>say the function name and language. approach, full code, time + space complexity. no example spam.</p>
+          <img class="window" src="assets/preview-code.png" width="388" height="330" alt="Ancesra writing reverse_list(head) in Python with its time and space complexity" loading="lazy">
+        </article>
+        <article class="card card-files">
+          <h3><span class="num">03</span>my files</h3>
+          <p>drop in notes, pdfs, the hostel handbook. it answers from your files and cites the page. nothing gets uploaded.</p>
+          <img class="window" src="assets/preview-files.png" width="379" height="230" alt="The My files page with a drop zone and a file being indexed" loading="lazy">
+        </article>
+        <article class="card card-debug">
+          <h3><span class="num">04</span>debug</h3>
+          <p>paste the broken function. one sentence on what's wrong, then the fixed code. same name, same params.</p>
+          <img class="window" src="assets/preview-debug.png" width="379" height="230" alt="Ancesra in Debug mode, ready for a broken function" loading="lazy">
+        </article>
+        <article class="card card-private">
+          <h3><span class="num">05</span>private</h3>
+          <div class="private-body">
+            <p class="big">0 bytes</p>
+            <p class="accent-line">sent to anyone. ever.</p>
+            <ul class="tags">
+              <li>no account</li>
+              <li>no telemetry</li>
+              <li>no server</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Offer -->
+    <section class="offer" aria-labelledby="offer-title">
+      <img class="offer-glow" src="assets/offer-glow.svg" alt="" aria-hidden="true">
+      <div class="offer-art" aria-hidden="true">
+        <img class="halo" src="assets/offer-halo.svg" alt="">
+        <div class="blob blob-offer"></div>
+      </div>
+      <h2 class="offer-title" id="offer-title">
+        <span>no wifi.</span>
+        <span>no cloud.</span>
+        <span class="accent">no cap.</span>
+      </h2>
+      <p>free. forever. download once with wifi on, let it set itself up, then go offline for good. updates are optional and never phone home.</p>
+      <a class="pill" data-link="download" href="#">get ancesra<span class="pill-arrow" aria-hidden="true"></span></a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-left">
+      <img src="assets/logo.png" width="19" height="19" alt="">
+      <span>© 2026 ancesra ai · made offline by 4bhimxnyu</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="#top">home</a>
+      <a href="#about">about</a>
+      <a href="#features">docs</a>
+      <a href="#about" data-link="founder">founder</a>
+      <a href="#" data-link="contribute">contribute</a>
+    </nav>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
