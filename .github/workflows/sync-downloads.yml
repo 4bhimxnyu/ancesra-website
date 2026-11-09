@@ -1,0 +1,38 @@
+# Every 30 minutes: add the website's new downloads to download.md.
+# Uses the workflow's own GITHUB_TOKEN (given automatically), so no personal
+# token is needed. Can also be started by hand from the Actions tab.
+name: Sync downloads
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-downloads
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Add new downloads to download.md
+        run: node scripts/sync-downloads.mjs
+      - name: Commit
+        run: |
+          if git diff --quiet -- download.md .downloads-synced; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git config user.name "ancesra downloads"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add download.md .downloads-synced
+          git commit -m "Downloads: $(grep -o 'Total downloads: \*\*[0-9]*' download.md | grep -o '[0-9]*$') total"
+          git push
