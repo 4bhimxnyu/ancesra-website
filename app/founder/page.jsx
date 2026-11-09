@@ -1,4 +1,3 @@
-import DownloadCount from "../components/DownloadCount";
 import PillButton from "../components/PillButton";
 import { PageHero, SiteFooter, SiteHeader } from "../components/SiteChrome";
 import { LINKS, linkProps } from "@/lib/links";
@@ -44,7 +43,6 @@ export default function Founder() {
               </div>
             </div>
           </div>
-          <DownloadCount big every={15}>downloads so far</DownloadCount>
         </section>
 
         <section className="section" aria-labelledby="journey-title">

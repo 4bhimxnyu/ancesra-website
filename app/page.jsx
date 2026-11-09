@@ -63,7 +63,7 @@ export default function Home() {
               <PillButton href={LINKS.download} download>get it for windows</PillButton>
               <PillButton href="#features" outline>how it works</PillButton>
             </div>
-            <DownloadCount />
+            <DownloadCount big every={15}>downloads so far</DownloadCount>
           </div>
         </section>
 
