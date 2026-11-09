@@ -1,15 +1,15 @@
 // The ancesra ai landing page, from the Figma "Landing — v2 (editorial)" frame.
 import Image from "next/image";
-import NavLinks from "./components/NavLinks";
 import OfflineToggle from "./components/OfflineToggle";
 import PillButton from "./components/PillButton";
+import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 import { LINKS } from "@/lib/links";
 
 const MARQUEE = ["works offline", "zero cloud", "free forever", "your files stay yours", "no account", "runs on your laptop"];
 
 const STATS = [
   ["100%", "offline, always"],
-  ["0", "bytes sent. ever."],
+  ["0", "chats sent. ever."],
   ["1", "download. that's it."]
 ];
 
@@ -32,13 +32,7 @@ function CardTitle({ num, children }) {
 export default function Home() {
   return (
     <>
-      <a className="skip" href="#main">Skip to content</a>
-
-      <header className="nav" id="top">
-        <a className="brand" href="#top">ancesra.</a>
-        <NavLinks />
-        <PillButton href={LINKS.download}>download</PillButton>
-      </header>
+      <SiteHeader />
 
       <main id="main">
         {/* Hero */}
@@ -65,7 +59,7 @@ export default function Home() {
           <div className="hero-bottom">
             <p>stuck in traffic. power cut. hostel wifi dead again. still need ai? ancesra runs 100% on your laptop. ask it anything, get your code fixed, read your own notes. nothing ever leaves your machine. fr.</p>
             <div className="buttons">
-              <PillButton href={LINKS.download}>get it for windows</PillButton>
+              <PillButton href={LINKS.download} download>get it for windows</PillButton>
               <PillButton href="#features" outline>how it works</PillButton>
             </div>
           </div>
@@ -86,7 +80,7 @@ export default function Home() {
           <div className="about-row">
             <div className="about-copy">
               <p>ancesra is the ai that doesn&apos;t need the internet. one dev, one laptop, zero servers. built for 2am study sessions, trains with no bars, and the simple idea that your data should just… stay yours. install once with wifi on. then unplug. it keeps going.</p>
-              <a className="more" href="#features">more<span className="more-arrow" aria-hidden="true" /></a>
+              <a className="more" href="/founder">more<span className="more-arrow" aria-hidden="true" /></a>
             </div>
             <dl className="stats">
               {STATS.map(([value, label]) => (
@@ -101,7 +95,7 @@ export default function Home() {
           <h2 className="section-title" id="features-title">what it does</h2>
           <div className="features-intro">
             <p>three modes plus your own files. all of it runs on your computer, even in airplane mode. when it uses one of your docs it tells you the file and the page. no guessing.</p>
-            <PillButton href={LINKS.download}>download</PillButton>
+            <PillButton href={LINKS.download} download>download</PillButton>
           </div>
 
           <div className="bento">
@@ -141,17 +135,11 @@ export default function Home() {
             <span className="accent">no cap.</span>
           </h2>
           <p>free. forever. download once with wifi on, let it set itself up, then go offline for good. updates are optional and never phone home.</p>
-          <PillButton href={LINKS.download}>get ancesra</PillButton>
+          <PillButton href={LINKS.download} download>get ancesra</PillButton>
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="footer-left">
-          <img src="/assets/logo.png" width={19} height={19} alt="" />
-          <span>© 2026 ancesra ai · made offline by 4bhimxnyu</span>
-        </div>
-        <NavLinks className="footer-links" label="Footer" highlight={false} />
-      </footer>
+      <SiteFooter />
     </>
   );
 }

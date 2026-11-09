@@ -1,40 +1,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LINKS, linkProps } from "@/lib/links";
+import { usePathname } from "next/navigation";
+import { PAGES } from "@/lib/links";
 
-const ITEMS = [
-  { label: "home", href: "#top", section: "top" },
-  { label: "about", href: "#about", section: "about" },
-  { label: "docs", href: "#features", section: "features" },
-  { label: "founder", href: LINKS.founder },
-  { label: "contribute", href: LINKS.contribute }
-];
-
-// The nav links. The one for the section being read gets the coral underline.
+// The site's links. The current page gets the coral underline; on the home
+// page, "about" takes it while that section is on screen.
 export default function NavLinks({ className = "nav-links", label = "Main", highlight = true }) {
-  const [active, setActive] = useState("top");
+  const pathname = usePathname();
+  const [section, setSection] = useState(null);
 
   useEffect(() => {
-    if (!highlight || !("IntersectionObserver" in window)) return;
-    const sections = ["about", "features"].map((id) => document.getElementById(id)).filter(Boolean);
-    const observer = new IntersectionObserver((entries) => {
-      for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    sections.forEach((s) => observer.observe(s));
-    const onScroll = () => { if (window.scrollY < 200) setActive("top"); };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [highlight]);
+    if (!highlight || pathname !== "/" || !("IntersectionObserver" in window)) return;
+    const about = document.getElementById("about");
+    if (!about) return;
+    const observer = new IntersectionObserver(([e]) => setSection(e.isIntersecting ? "about" : null), { rootMargin: "-45% 0px -50% 0px" });
+    observer.observe(about);
+    return () => observer.disconnect();
+  }, [highlight, pathname]);
+
+  const isActive = (href) => {
+    if (!highlight) return false;
+    if (href === "/#about") return pathname === "/" && section === "about";
+    if (href === "/") return pathname === "/" && section !== "about";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <nav className={className} aria-label={label}>
-      {ITEMS.map((item) => (
-        <a key={item.label} className={highlight && item.section === active ? "active" : undefined} {...linkProps(item.href)}>
-          {item.label}
+      {PAGES.map((p) => (
+        <a key={p.label} href={p.href} className={isActive(p.href) ? "active" : undefined} aria-current={isActive(p.href) && !p.href.includes("#") ? "page" : undefined}>
+          {p.label}
         </a>
       ))}
     </nav>
