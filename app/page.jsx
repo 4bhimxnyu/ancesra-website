@@ -110,7 +110,7 @@ export default function Home() {
             <article className="card card-private">
               <CardTitle num="05">private</CardTitle>
               <div className="private-body">
-                <p className="big">0 bytes</p>
+                <p className="big">0 chats</p>
                 <p className="accent-line">sent to anyone. ever.</p>
                 <ul className="tags">
                   <li>no account</li>
@@ -134,7 +134,7 @@ export default function Home() {
             <span>no cloud.</span>
             <span className="accent">no cap.</span>
           </h2>
-          <p>free. forever. download once with wifi on, let it set itself up, then go offline for good. updates are optional and never phone home.</p>
+          <p>free. forever. download once with wifi on, let it set itself up, then go offline for good. updates are optional, and checking for one only asks for the latest version number. your chats never leave.</p>
           <PillButton href={LINKS.download} download>get ancesra</PillButton>
         </section>
       </main>

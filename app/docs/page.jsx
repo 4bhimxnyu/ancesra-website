@@ -1,3 +1,4 @@
+import DocsToc from "../components/DocsToc";
 import PillButton from "../components/PillButton";
 import { PageHero, SiteFooter, SiteHeader } from "../components/SiteChrome";
 import { LINKS, linkProps } from "@/lib/links";
@@ -44,12 +45,7 @@ export default async function Docs() {
         </PageHero>
 
         <div className="docs-layout">
-          <nav className="docs-toc" aria-label="On this page">
-            <p>on this page</p>
-            <ol>
-              {TOC.map(([id, label]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}
-            </ol>
-          </nav>
+          <DocsToc items={TOC} />
 
           <div className="docs-body">
             <Section id="install" title="Install">
