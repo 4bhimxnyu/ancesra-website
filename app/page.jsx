@@ -1,6 +1,7 @@
 // The ancesra ai landing page, from the Figma "Landing — v2 (editorial)" frame.
 import Image from "next/image";
 import OfflineToggle from "./components/OfflineToggle";
+import DownloadCount from "./components/DownloadCount";
 import PillButton from "./components/PillButton";
 import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 import { LINKS } from "@/lib/links";
@@ -62,6 +63,7 @@ export default function Home() {
               <PillButton href={LINKS.download} download>get it for windows</PillButton>
               <PillButton href="#features" outline>how it works</PillButton>
             </div>
+            <DownloadCount />
           </div>
         </section>
 

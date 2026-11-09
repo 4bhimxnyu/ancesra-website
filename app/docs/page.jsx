@@ -1,4 +1,5 @@
 import DocsToc from "../components/DocsToc";
+import DownloadCount from "../components/DownloadCount";
 import PillButton from "../components/PillButton";
 import { PageHero, SiteFooter, SiteHeader } from "../components/SiteChrome";
 import { LINKS, linkProps } from "@/lib/links";
@@ -61,6 +62,7 @@ export default async function Docs() {
                 <PillButton href={LINKS.download} download>download for windows</PillButton>
                 <a className="text-link" {...linkProps(LINKS.releases)}>all versions and release notes</a>
               </div>
+              <DownloadCount />
             </Section>
 
             <Section id="requirements" title="What your PC needs">
@@ -108,6 +110,7 @@ export default async function Docs() {
                 <li><b>Checking for updates</b>, when you're online: one request to GitHub asking for the newest version. No chats or files are sent.</li>
               </ul>
               <p>There's no account, no analytics and no server of ours involved.</p>
+              <p className="muted-note">Downloading from this website is different: each download is counted in a public log (<a className="text-link" href="https://github.com/4bhimxnyu/ancesra-website/blob/main/download.md" target="_blank" rel="noopener">download.md</a>) with the time and your approximate place (city and country, worked out from your IP address). The IP address itself is never stored.</p>
             </Section>
 
             <Section id="updates" title="Updates">
