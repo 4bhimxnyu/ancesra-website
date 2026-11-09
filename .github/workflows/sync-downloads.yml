@@ -1,11 +1,15 @@
-# Every 30 minutes: add the website's new downloads to download.md.
+# About every 30 minutes: add the website's new downloads to download.md.
 # Uses the workflow's own GITHUB_TOKEN (given automatically), so no personal
 # token is needed. Can also be started by hand from the Actions tab.
+#
+# The minutes are :07 and :37, not :00/:30: GitHub delays or drops scheduled
+# runs at the busiest times (the top and half of the hour). With "*/30" not a
+# single scheduled run happened on 9 Nov 2026.
 name: Sync downloads
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "7,37 * * * *"
   workflow_dispatch:
 
 permissions:
