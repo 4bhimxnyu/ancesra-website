@@ -2,6 +2,8 @@
 
 The landing page for [ancesra ai](https://github.com/4bhimxnyu/Nexus-releases/releases/latest), a free AI assistant that runs 100% offline on your laptop.
 
+Live: https://ancesra.vercel.app
+
 Built with Next.js (App Router), from the Figma "Landing — v2 (editorial)" design.
 
 ```bash

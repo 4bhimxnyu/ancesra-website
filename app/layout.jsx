@@ -9,10 +9,8 @@ const urbanist = localFont({
   variable: "--font-urbanist"
 });
 
-// Vercel sets this to the production domain, so share previews get a full image URL
-const site = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : "http://localhost:3000";
+// The site's address, so share previews get a full image URL
+const site = process.env.VERCEL_ENV ? "https://ancesra.vercel.app" : "http://localhost:3000";
 
 export const metadata = {
   metadataBase: new URL(site),

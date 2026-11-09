@@ -4,7 +4,7 @@
 // one row per new download. No dependencies: Node 20+ only.
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 
-const SITE = process.env.SITE_URL || "https://ancesra-website.vercel.app";
+const SITE = process.env.SITE_URL || "https://ancesra.vercel.app";
 const TOTAL_RE = /^Total downloads: \*\*(\d+)\*\*$/m;
 const cell = (s) => String(s ?? "").replace(/[|\r\n]/g, " ").trim();
 
