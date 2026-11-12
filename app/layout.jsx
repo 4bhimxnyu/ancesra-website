@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import "./light.css";
+import "./form.css";
 import "./mobile.css";
 
 // Urbanist, bundled with the site (SIL Open Font License, app/fonts/OFL-Urbanist.txt)

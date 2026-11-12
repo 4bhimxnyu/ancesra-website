@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-// The live download counter. Refreshes every `every` seconds, and goes up by
-// one straight away when you click a download button. big = the founder page's
-// large number.
+// The live download counter. Refreshes every `every` seconds. big = the
+// founder page's large number.
 export default function DownloadCount({ initial = null, children = "downloads so far", every = 60, big = false }) {
   const [count, setCount] = useState(initial);
 
@@ -18,14 +17,9 @@ export default function DownloadCount({ initial = null, children = "downloads so
     };
     refresh();
     const timer = setInterval(refresh, every * 1000);
-    const onClick = (e) => {
-      if (e.target.closest && e.target.closest('a[href="/download"]')) setCount((c) => (c === null ? c : c + 1));
-    };
-    document.addEventListener("click", onClick);
     return () => {
       stop = true;
       clearInterval(timer);
-      document.removeEventListener("click", onClick);
     };
   }, [every]);
 

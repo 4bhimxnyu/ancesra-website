@@ -3,7 +3,9 @@ import NavLinks from "./NavLinks";
 import PillButton from "./PillButton";
 import ThemeToggle from "./ThemeToggle";
 import MobileMenu from "./MobileMenu";
+import DownloadDialog from "./DownloadDialog";
 import { LINKS } from "@/lib/links";
+import { mailConfigured } from "@/lib/mail";
 
 export function SiteHeader() {
   return (
@@ -18,6 +20,7 @@ export function SiteHeader() {
           <MobileMenu />
         </div>
       </header>
+      <DownloadDialog mail={mailConfigured()} />
     </>
   );
 }

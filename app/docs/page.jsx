@@ -2,8 +2,9 @@ import DocsToc from "../components/DocsToc";
 import DownloadCount from "../components/DownloadCount";
 import PillButton from "../components/PillButton";
 import { PageHero, SiteFooter, SiteHeader } from "../components/SiteChrome";
-import { LINKS, linkProps } from "@/lib/links";
+import { LINKS } from "@/lib/links";
 import { formatSize, getLatestRelease } from "@/lib/release";
+import { mailConfigured } from "@/lib/mail";
 
 export const metadata = {
   title: "docs — ancesra ai",
@@ -51,7 +52,9 @@ export default async function Docs() {
           <div className="docs-body">
             <Section id="install" title="Install">
               <ol className="steps">
-                <li><strong>Download the installer.</strong> {release
+                <li><strong>Get the installer.</strong> {mailConfigured()
+                  ? <>Click download and enter your name and email: the download link arrives by email. </>
+                  : <>Click download and enter your name and email, and the download starts. </>}{release
                   ? <>The newest version is <b>{release.version}</b> ({formatSize(release.size)}, Windows 10 or 11).</>
                   : <>It's a single Windows installer of about 120 MB.</>}</li>
                 <li><strong>Run it.</strong> Windows may warn that the app is from an unknown publisher, because the installer isn't code-signed yet. Choose <em>More info</em>, then <em>Run anyway</em>.</li>
@@ -60,7 +63,6 @@ export default async function Docs() {
               </ol>
               <div className="doc-cta">
                 <PillButton href={LINKS.download} download>download for windows</PillButton>
-                <a className="text-link" {...linkProps(LINKS.releases)}>all versions and release notes</a>
               </div>
               <DownloadCount />
             </Section>
@@ -109,8 +111,8 @@ export default async function Docs() {
                 <li><b>The first setup</b>: downloading Ollama and the AI model.</li>
                 <li><b>Checking for updates</b>, when you're online: one request to GitHub asking for the newest version. No chats or files are sent.</li>
               </ul>
-              <p>There's no account, no analytics and no server of ours involved.</p>
-              <p className="muted-note">Downloading from this website is different: each download is counted in a public log (<a className="text-link" href="https://github.com/4bhimxnyu/ancesra-website/blob/main/download.md" target="_blank" rel="noopener">download.md</a>) with the time and your approximate place (city and country, worked out from your IP address). The IP address itself is never stored.</p>
+              <p>The app has no account and no analytics, and no server of ours is involved in running it.</p>
+              <p className="muted-note">Downloading from this website is different. It asks for your name and email, which are kept privately and never sold or published; the email is used to send you the download link and to contact you about Ancesra. Separately, each download is counted in a public log (<a className="text-link" href="https://github.com/4bhimxnyu/ancesra-website/blob/main/download.md" target="_blank" rel="noopener">download.md</a>) with the time and your approximate place (city and country, worked out from your IP address). The IP address itself is never stored.</p>
             </Section>
 
             <Section id="updates" title="Updates">
