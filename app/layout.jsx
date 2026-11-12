@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import "./light.css";
 
 // Urbanist, bundled with the site (SIL Open Font License, app/fonts/OFL-Urbanist.txt)
 const urbanist = localFont({
@@ -27,10 +28,19 @@ export const viewport = {
   themeColor: "#070707"
 };
 
+// Runs before the page paints: applies the saved theme (dark unless the visitor
+// chose light), so there is no flash of the wrong one. Keep the key in step
+// with THEME_KEY in components/ThemeToggle.jsx. A link can also ask for a
+// theme with ?theme=light or ?theme=dark (not saved).
+const themeScript = `try{var q=new URLSearchParams(location.search).get("theme");if(q==="light"||(q!=="dark"&&localStorage.getItem("ancesra-theme")==="light")){document.documentElement.dataset.theme="light";var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#f6f1ea")}}catch(e){}`;
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={urbanist.variable}>
-      <body>{children}</body>
+    <html lang="en" className={urbanist.variable} suppressHydrationWarning>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,0 +1,214 @@
+/* The light theme: warm paper, ink text, the same coral.
+   Turned on by data-theme="light" on <html> (ThemeToggle.jsx; the choice is
+   remembered). Dark stays the default and globals.css is unchanged by this file.
+
+   Why a separate set of rules and not just swapped variables: the dark design
+   is "glass on black" (white at 4-20% opacity). On paper that glass is
+   invisible, so surfaces become solid white cards with soft warm shadows. */
+
+/* ---------- the theme switch (both themes) ---------- */
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.theme-toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  color: var(--text);
+  cursor: pointer;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 999px;
+  transition: background .28s ease-out, border-color .28s ease-out, color .28s ease-out;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle svg { grid-area: 1 / 1; width: 18px; height: 18px; transition: transform .45s var(--ease), opacity .28s; }
+/* Dark shows the sun (what you'd switch to); light shows the moon */
+.theme-toggle .moon { opacity: 0; transform: rotate(-60deg) scale(.6); }
+[data-theme="light"] .theme-toggle .sun { opacity: 0; transform: rotate(60deg) scale(.6); }
+[data-theme="light"] .theme-toggle .moon { opacity: 1; transform: none; }
+
+/* A soft cross-fade while switching (added for a moment by ThemeToggle) */
+.theme-switching, .theme-switching * { transition: background-color .35s ease, color .35s ease, border-color .35s ease, box-shadow .35s ease !important; }
+
+/* ---------- tokens ---------- */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f1ea;
+  --text: #15110e;
+  --text-rgb: 21, 17, 14;
+  --muted: #655d57;
+  /* Coral for big type and fills; the darker coral is for small text, which
+     needs more contrast on paper (4.9:1 against 3.1:1) */
+  --accent: #ef5a3c;
+  --accent-text: #bf3a1b;
+  --line: rgba(21, 17, 14, .12);
+  --glass: #fffdfa;
+  --card-border: rgba(21, 17, 14, .1);
+  --card-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(60, 35, 20, .06), 0 24px 48px -20px rgba(60, 35, 20, .22);
+}
+
+/* Paper with a faint warm wash at the top, so the page isn't one flat colour */
+[data-theme="light"] body {
+  background:
+    radial-gradient(1100px 620px at 78% -120px, rgba(239, 90, 60, .16), transparent 70%),
+    radial-gradient(900px 520px at -10% 30%, rgba(239, 90, 60, .05), transparent 70%),
+    var(--bg);
+  background-repeat: no-repeat;
+}
+[data-theme="light"] ::selection { background: rgba(239, 90, 60, .28); }
+
+/* Small coral text gets the darker coral; big display type keeps the bright one */
+[data-theme="light"] .accent-line,
+[data-theme="light"] .num,
+[data-theme="light"] .steps li::before,
+[data-theme="light"] .facts li::before,
+[data-theme="light"] .marquee-track i,
+[data-theme="light"] .text-link:hover { color: var(--accent-text); }
+[data-theme="light"] .num,
+[data-theme="light"] .steps li::before { background: rgba(239, 90, 60, .12); border-color: rgba(191, 58, 27, .45); }
+
+/* ---------- pill buttons: ink on paper (the dark theme's white pill, inverted) ---------- */
+[data-theme="light"] .pill {
+  color: #f6f1ea;
+  background: linear-gradient(#2e2823, #120e0b);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, .22),
+    inset 0 -2px 2px rgba(0, 0, 0, .4),
+    0 8px 16px -6px rgba(40, 22, 12, .45);
+}
+[data-theme="light"] .pill-arrow {
+  background: url("/assets/arrow-light.svg") center / 14px no-repeat, linear-gradient(#fff, #e6ddd3);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 4px rgba(0, 0, 0, .35);
+}
+[data-theme="light"] .pill.outline {
+  color: var(--text);
+  background: linear-gradient(#fffdfa, #f1eae1);
+  border-color: rgba(21, 17, 14, .2);
+  box-shadow: inset 0 1.5px 0 #fff, 0 6px 14px -6px rgba(60, 35, 20, .3);
+}
+[data-theme="light"] .pill.outline .pill-arrow {
+  background: url("/assets/arrow-dark.svg") center / 14px no-repeat, linear-gradient(#2e2823, #120e0b);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 2px 4px rgba(0, 0, 0, .3);
+}
+[data-theme="light"] .pill:hover, [data-theme="light"] .pill:focus-visible {
+  color: #fff;
+  background: linear-gradient(#f26a4e, #e04a2c);
+  box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, .4), 0 10px 24px -6px rgba(239, 90, 60, .6);
+}
+[data-theme="light"] .pill.outline:hover, [data-theme="light"] .pill.outline:focus-visible {
+  color: #f6f1ea;
+  background: linear-gradient(#2e2823, #120e0b);
+  border-color: transparent;
+  box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, .22), 0 10px 24px -6px rgba(239, 90, 60, .45);
+}
+[data-theme="light"] .pill.outline:hover .pill-arrow, [data-theme="light"] .pill.outline:focus-visible .pill-arrow {
+  background: url("/assets/arrow-light.svg") center / 14px no-repeat, linear-gradient(#fff, #e6ddd3);
+}
+
+/* ---------- nav ---------- */
+[data-theme="light"] .nav { background: rgba(246, 241, 234, .78); }
+[data-theme="light"] .theme-toggle { background: #fffdfa; border-color: rgba(21, 17, 14, .16); box-shadow: 0 2px 6px -2px rgba(60, 35, 20, .2); }
+[data-theme="light"] .theme-toggle:hover { border-color: var(--accent-text); color: var(--accent-text); }
+[data-theme="light"] .skip { color: var(--bg); }
+
+/* ---------- hero ---------- */
+/* The coral halos were drawn to glow on black; on paper they only need to tint */
+[data-theme="light"] .hero-art .halo, [data-theme="light"] .offer-art .halo { opacity: .75; }
+[data-theme="light"] .page-glow { opacity: .6; }
+[data-theme="light"] .offer-glow { opacity: .4; }
+/* The blob stays a dark glossy object: it is the one "night" thing on the page */
+[data-theme="light"] .blob {
+  box-shadow: inset -8px -10px 24px rgba(255, 255, 255, .3), 0 0 36px rgba(239, 90, 60, .4), 0 28px 50px -10px rgba(120, 45, 25, .4);
+}
+
+[data-theme="light"] .chip, [data-theme="light"] .offline-toggle {
+  background: rgba(255, 253, 250, .82);
+  border-color: rgba(21, 17, 14, .1);
+  box-shadow: inset 0 1px 0 #fff, 0 16px 32px -14px rgba(60, 35, 20, .35);
+}
+[data-theme="light"] .dot { box-shadow: 0 0 0 3px rgba(239, 90, 60, .18); }
+[data-theme="light"] .track { box-shadow: inset 0 2px 4px rgba(0, 0, 0, .2), 0 0 0 4px rgba(239, 90, 60, .14); }
+[data-theme="light"] .offline-toggle[aria-checked="false"] .track { background: #cfc6bc; box-shadow: inset 0 2px 4px rgba(0, 0, 0, .18); }
+[data-theme="light"] .knob { box-shadow: 0 2px 4px rgba(0, 0, 0, .25), inset 0 1px 0 #fff; }
+
+/* ---------- marquee: an ink band, for one strong dark stripe on the light page ---------- */
+[data-theme="light"] .marquee {
+  background: #15110e;
+  border-color: #15110e;
+  box-shadow: 0 20px 40px -24px rgba(60, 35, 20, .5);
+}
+[data-theme="light"] .marquee-track span { color: rgba(246, 241, 234, .9); }
+[data-theme="light"] .marquee-track i { color: var(--accent); }
+
+/* ---------- sections ---------- */
+[data-theme="light"] .more-arrow { background-image: url("/assets/arrow-light.svg"); }
+[data-theme="light"] .more:hover .more-arrow { border-color: var(--accent-text); }
+
+[data-theme="light"] .card,
+[data-theme="light"] .doc-cards > div {
+  border-color: var(--card-border);
+  box-shadow: var(--card-shadow);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+[data-theme="light"] .card { transition: box-shadow .4s var(--ease), transform .4s var(--ease); }
+[data-theme="light"] .card:hover { box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(60, 35, 20, .06), 0 32px 56px -20px rgba(120, 50, 25, .32); }
+/* The app previews are screenshots of the dark app: give them a soft lift so
+   they read as a window on the card, not a hole in it */
+[data-theme="light"] .card .window { filter: drop-shadow(0 -6px 22px rgba(40, 22, 12, .22)); }
+/* The "private" card is the page's second ink block */
+[data-theme="light"] .card-private {
+  color: #f6f1ea;
+  background: linear-gradient(160deg, #241d18, #120e0b);
+  border-color: #15110e;
+  box-shadow: 0 24px 48px -20px rgba(40, 22, 12, .55);
+}
+[data-theme="light"] .card-private .accent-line { color: #ff7a5e; }
+[data-theme="light"] .card-private .num { color: #ff7a5e; background: rgba(239, 90, 60, .18); border-color: rgba(239, 90, 60, .6); }
+[data-theme="light"] .card-private .tags li { border-color: rgba(246, 241, 234, .3); }
+
+/* ---------- offer ---------- */
+[data-theme="light"] .offer .accent, [data-theme="light"] .headline .accent { color: var(--accent); }
+
+/* ---------- inner pages ---------- */
+[data-theme="light"] .text-link { text-decoration-color: rgba(191, 58, 27, .6); }
+[data-theme="light"] .docs-toc a.active { border-left-color: var(--accent-text); }
+[data-theme="light"] .founder-card {
+  border-color: var(--card-border);
+  background: linear-gradient(90deg, rgba(239, 90, 60, .14), rgba(239, 90, 60, 0) 60%), var(--glass);
+  box-shadow: var(--card-shadow);
+}
+[data-theme="light"] .timeline::before { background: linear-gradient(var(--accent), rgba(239, 90, 60, .15)); }
+[data-theme="light"] .tl-body::before { box-shadow: 0 0 0 4px rgba(239, 90, 60, .18); }
+
+/* ---------- download counter ---------- */
+[data-theme="light"] .count-dot { background: #1f9d5c; }
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle svg { transition: none; }
+  .theme-switching, .theme-switching * { transition: none !important; }
+}
+@media (max-width: 720px) {
+  .nav-actions { gap: 8px; }
+}
+
+/* ---------- fixes found on the first light render ---------- */
+/* Offer: a dark blob hid the dark title. On paper it becomes a frosted glass
+   pebble, so the words show through it, blurred (the dark page does the same
+   trick with a dark blob over light words). */
+[data-theme="light"] .blob-offer {
+  opacity: 1;
+  background:
+    linear-gradient(142deg, rgba(255, 255, 255, .7) 0%, rgba(255, 244, 236, .38) 45%, rgba(255, 255, 255, .62) 100%) padding-box,
+    linear-gradient(200deg, rgba(239, 90, 60, .95) 0%, rgba(239, 90, 60, .7) 45%, #5b7cf0 100%) border-box;
+  box-shadow: inset -8px -10px 24px rgba(255, 255, 255, .8), inset 6px 8px 18px rgba(239, 90, 60, .12), 0 24px 44px -12px rgba(160, 60, 30, .35);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+}
+/* The logo is a white tile: give it an edge so it doesn't melt into the paper */
+[data-theme="light"] .footer-left img,
+[data-theme="light"] .founder-card img { border-radius: 5px; box-shadow: 0 0 0 1px rgba(21, 17, 14, .14), 0 2px 6px -2px rgba(60, 35, 20, .3); }
+[data-theme="light"] .founder-card img { border-radius: 18px; }

@@ -4,8 +4,10 @@
 /* Urbanist is loaded by next/font in app/layout.jsx (--font-urbanist) */
 
 :root {
+  color-scheme: dark;
   --bg: #070707;
   --text: #f4f1ee;
+  --text-rgb: 244, 241, 238;
   --muted: #8e8884;
   --accent: #ef5a3c;
   --line: rgba(255, 255, 255, .1);
@@ -226,7 +228,7 @@ p { margin: 0; }
 .offline-toggle[aria-checked="false"] .knob { left: 3px; }
 .toggle-text { display: flex; flex-direction: column; line-height: normal; }
 .toggle-text strong { font-size: 13px; font-weight: 600; }
-.toggle-text small { font-size: 12px; color: rgba(244, 241, 238, .6); }
+.toggle-text small { font-size: 12px; color: rgba(var(--text-rgb), .6); }
 
 .hero-bottom {
   position: relative;
@@ -262,7 +264,7 @@ p { margin: 0; }
   letter-spacing: .04em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: rgba(244, 241, 238, .85);
+  color: rgba(var(--text-rgb), .85);
 }
 .marquee-item { display: flex; align-items: center; gap: 28px; }
 .marquee-track i { font-style: normal; font-size: 16px; color: var(--accent); }
@@ -286,7 +288,7 @@ p { margin: 0; }
   width: 22px;
   height: 22px;
   border-radius: 999px;
-  border: 1px solid rgba(244, 241, 238, .4);
+  border: 1px solid rgba(var(--text-rgb), .4);
   background: url("/assets/arrow-small.svg") center / 11px no-repeat;
   transition: transform .28s ease-out, border-color .28s;
 }
@@ -354,7 +356,7 @@ p { margin: 0; }
 .private-body .big { font-size: 72px; font-weight: 300; line-height: .96; letter-spacing: -0.03em; }
 .accent-line { color: var(--accent); }
 .tags { list-style: none; margin: 0; padding: 8px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.tags li { padding: 6px 12px; font-size: 13px; line-height: 19px; border: 1px solid rgba(244, 241, 238, .25); border-radius: 999px; }
+.tags li { padding: 6px 12px; font-size: 13px; line-height: 19px; border: 1px solid rgba(var(--text-rgb), .25); border-radius: 999px; }
 
 /* ---------- offer ---------- */
 .offer {
@@ -402,7 +404,7 @@ p { margin: 0; }
   justify-content: space-between;
   gap: 16px;
   padding: 28px var(--pad);
-  border-top: 1px solid rgba(244, 241, 238, .12);
+  border-top: 1px solid rgba(var(--text-rgb), .12);
   font-size: 13px;
   line-height: 19px;
   color: var(--muted);
@@ -477,11 +479,11 @@ p { margin: 0; }
 .docs-body { display: flex; flex-direction: column; gap: 56px; }
 .doc-section { scroll-margin-top: 110px; display: flex; flex-direction: column; gap: 14px; }
 .doc-section h2 { margin: 0 0 4px; font-size: 32px; font-weight: 300; line-height: 1.1; letter-spacing: -0.01em; text-transform: uppercase; }
-.doc-section p { color: rgba(244, 241, 238, .82); }
+.doc-section p { color: rgba(var(--text-rgb), .82); }
 .doc-section b, .doc-section strong { color: var(--text); font-weight: 600; }
 .doc-section q { color: var(--text); quotes: "“" "”"; }
 .steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 14px; }
-.steps li { position: relative; padding-left: 44px; color: rgba(244, 241, 238, .82); counter-increment: step; }
+.steps li { position: relative; padding-left: 44px; color: rgba(var(--text-rgb), .82); counter-increment: step; }
 .steps li::before {
   content: counter(step, decimal-leading-zero);
   position: absolute;
@@ -498,7 +500,7 @@ p { margin: 0; }
   border-radius: 999px;
 }
 .facts { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-.facts li { position: relative; padding-left: 20px; color: rgba(244, 241, 238, .82); }
+.facts li { position: relative; padding-left: 20px; color: rgba(var(--text-rgb), .82); }
 .facts li::before { content: "✦"; position: absolute; left: 0; top: 0; font-size: 11px; color: var(--accent); }
 .facts.wide { width: min(760px, 100%); }
 .doc-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }

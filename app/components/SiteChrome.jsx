@@ -1,6 +1,7 @@
 // The header and footer shared by every page
 import NavLinks from "./NavLinks";
 import PillButton from "./PillButton";
+import ThemeToggle from "./ThemeToggle";
 import { LINKS } from "@/lib/links";
 
 export function SiteHeader() {
@@ -10,7 +11,10 @@ export function SiteHeader() {
       <header className="nav" id="top">
         <a className="brand" href="/">ancesra.</a>
         <NavLinks />
-        <PillButton href={LINKS.download} download>download</PillButton>
+        <div className="nav-actions">
+          <ThemeToggle />
+          <PillButton href={LINKS.download} download>download</PillButton>
+        </div>
       </header>
     </>
   );
