@@ -9,6 +9,17 @@ export default function DocsToc({ items }) {
   // The link last clicked: near the bottom of the page several sections fit on
   // screen at once, and the clicked one should stay marked
   const clicked = useRef(null);
+  const list = useRef(null);
+
+  // On phones the menu is one scrolling row of chips (mobile.css): slide the
+  // row so the current chip stays in view. scrollTo on the row only, so the
+  // page itself never jumps.
+  useEffect(() => {
+    const ol = list.current;
+    if (!ol || ol.scrollWidth <= ol.clientWidth) return;
+    const a = ol.querySelector("a.active");
+    if (a) ol.scrollTo({ left: a.offsetLeft - (ol.clientWidth - a.offsetWidth) / 2, behavior: "smooth" });
+  }, [active]);
 
   useEffect(() => {
     let frame = 0;
@@ -46,7 +57,7 @@ export default function DocsToc({ items }) {
   return (
     <nav className="docs-toc" aria-label="On this page">
       <p>on this page</p>
-      <ol>
+      <ol ref={list}>
         {items.map(([id, label]) => (
           <li key={id}>
             <a href={`#${id}`} className={active === id ? "active" : undefined} aria-current={active === id ? "location" : undefined}

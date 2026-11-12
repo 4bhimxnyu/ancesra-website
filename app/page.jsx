@@ -3,6 +3,7 @@ import Image from "next/image";
 import OfflineToggle from "./components/OfflineToggle";
 import DownloadCount from "./components/DownloadCount";
 import PillButton from "./components/PillButton";
+import SendToLaptop from "./components/SendToLaptop";
 import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 import { LINKS } from "@/lib/links";
 
@@ -63,6 +64,7 @@ export default function Home() {
               <PillButton href={LINKS.download} download>get it for windows</PillButton>
               <PillButton href="#features" outline>how it works</PillButton>
             </div>
+            <SendToLaptop />
             <DownloadCount big every={15}>downloads so far</DownloadCount>
           </div>
         </section>

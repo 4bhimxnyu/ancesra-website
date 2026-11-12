@@ -2,6 +2,7 @@
 import NavLinks from "./NavLinks";
 import PillButton from "./PillButton";
 import ThemeToggle from "./ThemeToggle";
+import MobileMenu from "./MobileMenu";
 import { LINKS } from "@/lib/links";
 
 export function SiteHeader() {
@@ -14,6 +15,7 @@ export function SiteHeader() {
         <div className="nav-actions">
           <ThemeToggle />
           <PillButton href={LINKS.download} download>download</PillButton>
+          <MobileMenu />
         </div>
       </header>
     </>

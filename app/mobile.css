@@ -1,0 +1,202 @@
+/* Phone layout (720px and under). Loaded last, so it wins over globals.css and
+   light.css without touching them. What it changes, and why:
+   1. the page links were simply hidden on phones: now a menu drops from the header
+   2. the hero's example chips and "offline mode" switch were hidden: now in the flow
+   3. a phone can't install a Windows app: a line offers to send the link to a laptop
+   4. the three stats wrapped 2 + 1: now one row of three
+   5. the wide chat preview shrank to 119px tall: now cropped larger
+   6. the docs menu was a 2-column list above the text: now one sticky row of chips
+   7. small links get a bigger touch area (about 44px, the usual thumb target)
+   8. the headline shrinks enough to keep "NO PROBLEM." on one line at 320px */
+
+/* ---------- menu button and panel: hidden on wide screens ---------- */
+.menu-toggle, .mobile-menu, .send-laptop { display: none; }
+
+@media (max-width: 720px) {
+  /* ---------- 1. header + menu ---------- */
+  .menu-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    padding: 0;
+    display: block;
+    color: var(--text);
+    cursor: pointer;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 999px;
+  }
+  /* Two bars that cross into an X when the menu is open */
+  .menu-toggle span {
+    position: absolute;
+    left: 12px;
+    width: 14px;
+    height: 1.8px;
+    border-radius: 1px;
+    background: currentColor;
+    transition: transform .28s var(--ease), top .28s var(--ease);
+  }
+  .menu-toggle span:first-child { top: 15px; }
+  .menu-toggle span:last-child { top: 22px; }
+  .menu-toggle[aria-expanded="true"] span { top: 18.5px; }
+  .menu-toggle[aria-expanded="true"] span:first-child { transform: rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] span:last-child { transform: rotate(-45deg); }
+
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 4px var(--pad) 16px;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 30px 50px -20px rgba(0, 0, 0, .7);
+  }
+  .mobile-menu[hidden] { display: none; }
+  .mobile-menu a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 14px 0;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--line);
+    animation: menu-in .32s var(--ease) both;
+    animation-delay: calc(var(--i) * 35ms);
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu small { font-size: 13px; letter-spacing: 0; color: var(--muted); }
+  .mobile-menu a[aria-current="page"] { color: var(--accent); }
+  .mobile-menu a[aria-current="page"] small { color: var(--accent); }
+  @keyframes menu-in { from { opacity: 0; transform: translateY(-8px); } }
+
+  [data-theme="light"] .menu-toggle { background: #fffdfa; border-color: rgba(21, 17, 14, .16); box-shadow: 0 2px 6px -2px rgba(60, 35, 20, .2); }
+  [data-theme="light"] .mobile-menu { box-shadow: 0 30px 50px -24px rgba(60, 35, 20, .45); }
+
+  /* ---------- 2. hero ---------- */
+  .hero { padding-top: 48px; }
+  /* "NO PROBLEM." must fit on one line down to a 320px phone */
+  .headline { font-size: clamp(40px, 14.2vw, 60px); }
+  /* The example questions: one row you can swipe, running off the right edge
+     (three stacked chips pushed the download button off the first screen).
+     The padding leaves room for the chips' shadows, which a scrolling box
+     would otherwise cut off. */
+  .hero .chips {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin: 24px calc(var(--pad) * -1) -20px;
+    padding: 4px var(--pad) 28px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .hero .chips::-webkit-scrollbar { display: none; }
+  .hero .chip { position: static; display: flex; flex-shrink: 0; padding: 8px 13px; }
+  .offline-toggle { position: relative; left: auto; top: auto; display: flex; margin-top: 12px; }
+  .hero-bottom { margin-top: 28px; }
+  /* Two equal buttons side by side: easier to hit than two ragged ones */
+  .hero-bottom .buttons .pill { flex: 1 1 0; justify-content: space-between; }
+
+  /* ---------- 3. send the link to a laptop ---------- */
+  .send-laptop { display: block; margin-top: -6px; font-size: 13px; line-height: 20px; }
+  .send-laptop button {
+    padding: 6px 0;
+    font: inherit;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 4px;
+  }
+
+  /* ---------- marquee: a little smaller ---------- */
+  .marquee { padding: 13px 0; }
+  .marquee-track, .marquee-item { gap: 20px; }
+  .marquee-track span { font-size: 18px; }
+
+  /* ---------- 4. stats: one row of three ---------- */
+  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; }
+  .stats div { padding-top: 14px; border-top: 1px solid var(--line); }
+  .stats dt { font-size: 38px; }
+  .stats dd { font-size: 13px; line-height: 18px; }
+
+  /* ---------- 5. feature cards ---------- */
+  .section { padding-top: 32px; }
+  .card { padding: 20px 20px 0; border-radius: 20px; }
+  /* The chat preview is 812px wide: shrunk to a phone it was unreadable.
+     Show a taller crop of its right side (the answer) instead. */
+  .card-chat .window { height: 210px; object-fit: cover; object-position: 78% 0; border-radius: 10px 10px 0 0; }
+  .private-body .big { font-size: 64px; }
+  .card:hover .window { transform: none; }
+
+  /* ---------- offer ---------- */
+  .offer { padding-top: 64px; gap: 24px; }
+
+  /* ---------- 6. docs: the menu becomes a sticky row of chips ---------- */
+  /* minmax(0, …): without it the long chip row would stretch the whole page sideways */
+  .docs-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-top: 0; }
+  .docs-toc {
+    position: sticky;
+    top: 72px; /* the header's height on phones */
+    z-index: 40;
+    min-width: 0;
+    margin: 0 calc(var(--pad) * -1);
+    padding: 10px 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .docs-toc p { display: none; }
+  .docs-toc ol {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    padding: 0 var(--pad);
+    overflow-x: auto;
+    border-left: none;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .docs-toc ol::-webkit-scrollbar { display: none; }
+  .docs-toc a {
+    margin: 0;
+    padding: 7px 14px;
+    white-space: nowrap;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .docs-toc a.active { color: var(--text); border-color: var(--accent); background: rgba(239, 90, 60, .14); }
+  [data-theme="light"] .docs-toc a.active { border-color: var(--accent-text); }
+  .doc-section { scroll-margin-top: 136px; }
+  .docs-body { gap: 48px; }
+  .doc-section h2 { font-size: 28px; }
+
+  /* ---------- 7. touch areas ---------- */
+  .more { padding: 11px 0; margin: -11px 0; }
+  .text-link { display: inline-block; padding: 8px 0; }
+  .footer { gap: 8px; padding-top: 24px; padding-bottom: 28px; }
+  .footer-links { gap: 0 22px; margin-left: 0; }
+  .footer-links a { padding: 12px 0; }
+  .theme-toggle:hover { color: var(--text); border-color: rgba(255, 255, 255, .2); }
+}
+
+/* Very narrow phones: the header's download button keeps only its arrow */
+@media (max-width: 370px) {
+  .nav .pill { padding: 6px; gap: 0; font-size: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu a { animation: none; }
+  .menu-toggle span { transition: none; }
+}
