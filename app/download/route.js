@@ -15,9 +15,11 @@
 import { after } from "next/server";
 import { headers } from "next/headers";
 import { getLatestRelease } from "@/lib/release";
-import { isBot, placeFrom, saveDownload } from "@/lib/downloads";
+import { placeFrom, saveDownload } from "@/lib/downloads";
 import { cleanSignup, saveSignup } from "@/lib/signups";
 import { mailConfigured, recentlyMailed, sendDownloadEmail } from "@/lib/mail";
+
+const SCRIPT_RE = /curl|wget|python|go-http|headless/i;
 
 const answer = (body, status = 200) => Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
 
@@ -33,7 +35,11 @@ export async function POST(request) {
   } catch {
     return answer({ ok: false, error: "details" }, 400);
   }
-  if (isBot(h.get("user-agent") || "")) return answer({ ok: false, error: "details" }, 400);
+  // Only plain scripts are turned away here. isBot() is wider (it also matches
+  // "WhatsApp", "Telegram", "preview"...), which is right for not counting link
+  // previews, but it would reject real people who opened the site inside those
+  // apps' built-in browsers.
+  if (SCRIPT_RE.test(h.get("user-agent") || "") || !h.get("user-agent")) return answer({ ok: false, error: "details" }, 400);
   // "website" is a hidden field people never see. A script that fills it gets
   // a normal-looking answer and nothing is saved or sent.
   if (body.website) return answer({ ok: true, mode: "email" });
