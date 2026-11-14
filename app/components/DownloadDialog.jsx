@@ -7,6 +7,21 @@ const ERRORS = {
   later: "that didn't work just now. please try again in a minute."
 };
 
+// Where "open email" leads, by the part of the address after the @.
+// Gmail opens on a search for our email (spam included), in the right account.
+// An address we don't recognise (a college's own mail, say) gets no button.
+function inboxFor(email) {
+  const domain = email.split("@").pop().toLowerCase();
+  if (domain === "gmail.com" || domain === "googlemail.com") {
+    return { name: "gmail", url: "https://mail.google.com/mail/?authuser=" + encodeURIComponent(email) + "#search/ancesra+in%3Aanywhere" };
+  }
+  if (/^(outlook|hotmail|live|msn)\./.test(domain)) return { name: "outlook", url: "https://outlook.live.com/mail/0/" };
+  if (/^(yahoo|ymail|rocketmail)\./.test(domain)) return { name: "yahoo mail", url: "https://mail.yahoo.com/" };
+  if (domain === "icloud.com" || domain === "me.com") return { name: "icloud mail", url: "https://www.icloud.com/mail" };
+  if (/^(proton|protonmail)\.|^pm\.me$/.test(domain)) return { name: "proton mail", url: "https://mail.proton.me/" };
+  return null;
+}
+
 // The download popup. Every download button on the site is a link to
 // /download; this catches the click and opens the popup instead. It asks for
 // a name and an email, sends them to /download, and then either says "check
@@ -77,6 +92,7 @@ export default function DownloadDialog({ mail }) {
 
   const close = () => dialog.current && dialog.current.close();
   const done = state === "emailed" || state === "direct";
+  const inbox = state === "emailed" ? inboxFor(email) : null;
 
   return (
     <dialog className="dl-dialog" ref={dialog} aria-labelledby="dl-title"
@@ -132,7 +148,11 @@ export default function DownloadDialog({ mail }) {
             <p className="form-note">free, forever. we keep your name and email privately, to know who uses ancesra and to contact you about it. never sold, never shown in public. the app itself has no account.</p>
           </>
         )}
-        {done ? <button className="pill outline dl-ok" type="button" onClick={close}>done<span className="pill-arrow" aria-hidden="true" /></button> : null}
+        {inbox ? (
+          <a className="pill dl-open" href={inbox.url} target="_blank" rel="noopener noreferrer" onClick={close}>open {inbox.name}<span className="pill-arrow" aria-hidden="true" /></a>
+        ) : done ? (
+          <button className="pill outline dl-ok" type="button" onClick={close}>done<span className="pill-arrow" aria-hidden="true" /></button>
+        ) : null}
       </div>
     </dialog>
   );

@@ -71,6 +71,9 @@
 .dl-dialog button.pill .pill-arrow { width: 34px; height: 34px; }
 .dl-dialog button.pill:disabled { opacity: .6; cursor: progress; }
 .dl-dialog button.pill.outline { width: 100%; margin-top: 24px; padding: 7px 7px 7px 21px; }
+/* "open gmail" after the link is emailed: a link, sized like the form's button */
+.dl-open { display: flex; justify-content: space-between; width: 100%; margin-top: 24px; padding: 8px 8px 8px 22px; font-size: 16px; line-height: 23px; }
+.dl-open .pill-arrow { width: 34px; height: 34px; }
 
 /* The hidden field for scripts: off screen, not display:none (some scripts skip those) */
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
