@@ -110,8 +110,10 @@ export default async function Docs() {
               <ul className="facts">
                 <li><b>The first setup</b>: downloading Ollama and the AI model.</li>
                 <li><b>Checking for updates</b>, when you're online: one request to GitHub asking for the newest version. No chats or files are sent.</li>
+                <li><b>Setup details, once</b> (from version 2.7): the name, email, city and "how did you hear about us" answer you type on the setup screen. The screen says so before you continue. We use them to know who uses Ancesra and to email you about new versions. Never sold.</li>
+                <li><b>A daily count</b> (from version 2.7): the app version and how many messages you sent in Chat, Code and Debug. Numbers only, never the messages. You can switch it off in Settings.</li>
               </ul>
-              <p>The app has no account and no analytics, and no server of ours is involved in running it.</p>
+              <p>There is no login, and no server of ours is involved in answering you: the model runs on your computer.</p>
               <p className="muted-note">Downloading from this website is different. It asks for your name and email, which are kept privately and never sold or published; the email is used to send you the download link and to contact you about Ancesra. Separately, each download is counted in a public log (<a className="text-link" href="https://github.com/4bhimxnyu/ancesra-website/blob/main/download.md" target="_blank" rel="noopener">download.md</a>) with the time and your approximate place (city and country, worked out from your IP address). The IP address itself is never stored.</p>
             </Section>
 

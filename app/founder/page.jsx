@@ -17,7 +17,7 @@ const JOURNEY = [
 ];
 
 const VALUES = [
-  ["private by default", "your chats, files and memory stay on your computer. no account, no analytics."],
+  ["private by default", "your chats, files and memory stay on your computer. no login, and the model runs on your own machine."],
   ["free, actually", "built on open models and open-source tools that allow commercial use, so it can stay free."],
   ["measured, not guessed", "every change is tested against a question set before it ships. if a score drops, it doesn't ship."],
   ["honest answers", "no made-up policies, no fake sources. if your files don't say it, ancesra says so."]
