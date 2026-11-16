@@ -13,7 +13,7 @@ Please include what you found, the steps to reproduce it, and what someone could
 - This website: https://ancesra.vercel.app and the code in this repository
 - The download redirect (`/download`) and the download log (`/api/downloads`, `download.md`)
 
-For the ancesra **app** itself, report problems in [Nexus-releases issues](https://github.com/4bhimxnyu/Nexus-releases/issues), or privately in the same way through that repository's Security tab.
+For the ancesra **app** itself, report problems in [Ancesra-releases issues](https://github.com/4bhimxnyu/Ancesra-releases/issues), or privately in the same way through that repository's Security tab.
 
 ## Good to know
 

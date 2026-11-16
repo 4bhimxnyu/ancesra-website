@@ -33,7 +33,7 @@ The design comes from the Figma file's "Website UI" page (Landing — v2, editor
 ## How it works
 
 - **Next.js (App Router)**, plain JavaScript, deployed on **Vercel**. Every push to `main` goes live automatically.
-- **`/download`** asks GitHub for the newest release of [Nexus-releases](https://github.com/4bhimxnyu/Nexus-releases) (cached 10 minutes) and redirects to its `.exe`, so the download starts immediately and new releases need no change here.
+- **`/download`** asks GitHub for the newest release of [Ancesra-releases](https://github.com/4bhimxnyu/Ancesra-releases) (cached 10 minutes) and redirects to its `.exe`, so the download starts immediately and new releases need no change here.
 - **Download counter:** the sum of GitHub's own download counts for every released installer, refreshed every 15 seconds on the page.
 - **Download log ([`download.md`](download.md)):** each download through the site is saved to a private Vercel Blob store with the file, version, time and approximate place (city, region, country, from Vercel's IP geolocation; the IP address is never stored). A GitHub Action ([`sync-downloads.yml`](.github/workflows/sync-downloads.yml)) copies new entries into `download.md` every 30 minutes. Link previews, crawlers and scripts are not counted.
 
