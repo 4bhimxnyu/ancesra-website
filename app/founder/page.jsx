@@ -13,7 +13,8 @@ const JOURNEY = [
   ["26 Oct 2026", "v2.1–2.2", "one click, no terminal", "a loading screen, updates that install themselves, and a setup that installs everything on the first start."],
   ["27 Oct 2026", "v2.3", "knows 2026", "a built-in Wikipedia pack for recent events. 2026 questions went from 0% to 86% correct, still offline."],
   ["29 Oct 2026", "v2.4", "it gets to know you", "a welcome tour, a profile with stats, and memory that asks before saving anything."],
-  ["9 Nov 2026", "v2.5–2.6", "my files, and a new name", "answers from your own pdfs and notes. nexus became ancesra ai, with a new look."]
+  ["9 Nov 2026", "v2.5–2.6", "my files, and a new name", "answers from your own pdfs and notes. nexus became ancesra ai, with a new look."],
+  ["16 Nov 2026", "v2.7", "a screen for each job", "chat, code and debug each get their own screen and colour, and ancesra opens the right one for you. a new light theme, too."]
 ];
 
 const VALUES = [
