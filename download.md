@@ -4,7 +4,7 @@ Every download from [ancesra.vercel.app/download](https://ancesra.vercel.app/dow
 Place is approximate (city, region, country), worked out by Vercel from the visitor's IP address. The IP address itself is never stored.
 Link previews, crawlers and scripts are not counted.
 
-Total downloads: **24**
+Total downloads: **25**
 
 | # | File | Version | Time | Place |
 |---|---|---|---|---|
@@ -32,3 +32,4 @@ Total downloads: **24**
 | 22 | Ancesra-Setup-2.6.0.exe | 2.6.0 | 2026-11-13 07:17:51 UTC | Lucknow, UP, India |
 | 23 | Ancesra-Setup-2.6.0.exe | 2.6.0 | 2026-11-13 07:20:41 UTC | Lucknow, UP, India |
 | 24 | Ancesra-Setup-2.6.0.exe | 2.6.0 | 2026-11-14 11:00:30 UTC | Lucknow, UP, India |
+| 25 | Ancesra-Setup-2.7.0.exe | 2.7.0 | 2026-11-16 17:59:59 UTC | Lucknow, UP, India |
