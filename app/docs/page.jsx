@@ -148,13 +148,13 @@ export default async function Docs() {
               </dl>
             </Section>
 
-            {/* The two files are copies of NOTICE and LICENSE from the app (public/legal).
+            {/* The two PDFs are made from the app's NOTICE and LICENSE files (public/legal).
                 There is no patent on Ancesra, so none is offered here. */}
             <Section id="legal" title="Copyright and trademark">
               <p>Ancesra AI is © 2026 Abhimanyu. The code is free software under the GNU AGPL-3.0. Ancesra™ and the Ancesra logo are trademarks of Abhimanyu: the code licence does not cover the name or the logo.</p>
               <ul className="facts">
-                <li><a className="text-link" href="/legal/ancesra-copyright-and-trademark-notice.txt" download>Download the copyright and trademark notice</a> (text file): who owns what, and how the name and logo may be used.</li>
-                <li><a className="text-link" href="/legal/ancesra-licence-agpl-3.0.txt" download>Download the licence</a> (text file): the full GNU AGPL-3.0 the code is offered under.</li>
+                <li><a className="text-link" href="/legal/ancesra-copyright-and-trademark-notice.pdf" download>Download the copyright and trademark notice</a> (PDF, 1 page): who owns what, and how the name and logo may be used.</li>
+                <li><a className="text-link" href="/legal/ancesra-licence-agpl-3.0.pdf" download>Download the licence</a> (PDF): the full GNU AGPL-3.0 the code is offered under.</li>
               </ul>
               <p className="muted-note">The parts Ancesra is built from (the phi4-mini model, Ollama, Electron and others) belong to their own authors and keep their own licences; the app lists them under About.</p>
             </Section>
