@@ -30,7 +30,8 @@ export function SiteFooter() {
     <footer className="footer">
       <div className="footer-left">
         <img src="/assets/logo.png" width={19} height={19} alt="" />
-        <span>© 2026 ancesra ai · made offline by 4bhimxnyu</span>
+        {/* ™, not ®: the name and logo are claimed through use and are not registered */}
+        <span>© 2026 Abhimanyu (4bhimxnyu) · ancesra™ and its logo are trademarks of Abhimanyu · made offline</span>
       </div>
       <NavLinks className="footer-links" label="Footer" highlight={false} />
     </footer>
