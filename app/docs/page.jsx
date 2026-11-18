@@ -23,7 +23,8 @@ const TOC = [
   ["offline", "What goes online"],
   ["updates", "Updates"],
   ["troubleshooting", "Troubleshooting"],
-  ["faq", "FAQ"]
+  ["faq", "FAQ"],
+  ["legal", "Copyright and trademark"]
 ];
 
 function Section({ id, title, children }) {
@@ -145,6 +146,17 @@ export default async function Docs() {
                 <dt>Can it browse the internet?</dt>
                 <dd>No. It answers from its own knowledge, the built-in knowledge pack and the files you give it.</dd>
               </dl>
+            </Section>
+
+            {/* The two files are copies of NOTICE and LICENSE from the app (public/legal).
+                There is no patent on Ancesra, so none is offered here. */}
+            <Section id="legal" title="Copyright and trademark">
+              <p>Ancesra AI is © 2026 Abhimanyu. The code is free software under the GNU AGPL-3.0. Ancesra™ and the Ancesra logo are trademarks of Abhimanyu: the code licence does not cover the name or the logo.</p>
+              <ul className="facts">
+                <li><a className="text-link" href="/legal/ancesra-copyright-and-trademark-notice.txt" download>Download the copyright and trademark notice</a> (text file): who owns what, and how the name and logo may be used.</li>
+                <li><a className="text-link" href="/legal/ancesra-licence-agpl-3.0.txt" download>Download the licence</a> (text file): the full GNU AGPL-3.0 the code is offered under.</li>
+              </ul>
+              <p className="muted-note">The parts Ancesra is built from (the phi4-mini model, Ollama, Electron and others) belong to their own authors and keep their own licences; the app lists them under About.</p>
             </Section>
           </div>
         </div>

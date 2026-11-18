@@ -1,0 +1,39 @@
+Ancesra AI
+Copyright © 2026 Abhimanyu (4bhimxnyu). All rights reserved, except as
+granted by the licence below.
+
+COPYRIGHT
+---------
+The source code of Ancesra AI, its documentation, its interface design, its
+screens, its sounds made in code, and its written text are the original work
+of Abhimanyu and are protected by copyright.
+
+The source code is offered under the GNU Affero General Public License,
+version 3 only (AGPL-3.0-only). The full text is in the file LICENSE. Anyone
+who receives the program may use, study, share and change the code under the
+terms of that licence.
+
+Ancesra AI includes and depends on software, models and data made by other
+people (for example the phi4-mini model, Ollama, Electron, whisper.cpp and
+the Wikipedia knowledge pack). Each of those stays under its own licence and
+belongs to its own authors. They are listed in THIRD-PARTY-LICENSES.md.
+
+TRADEMARKS
+----------
+"Ancesra", "Ancesra AI" and the Ancesra logo (the face with two eyes) are
+trademarks of Abhimanyu. They are used with the ™ sign: they are claimed as
+marks through use and are not, at the time of writing, registered.
+
+The AGPL covers the code only. It does not give anyone the right to use the
+Ancesra name or logo. If you share a changed version of this program, give it
+a different name and logo, so that people are not led to think it is the
+original or that Abhimanyu stands behind it. Saying truthfully that your
+version is "based on Ancesra AI" is fine.
+
+Other names mentioned in this project (Microsoft, phi4-mini, Ollama,
+Electron, Windows, Spotify and others) belong to their owners and are used
+only to describe what the software works with.
+
+CONTACT
+-------
+Questions about using the code, the name or the logo: https://ancesra.vercel.app
