@@ -1,0 +1,61 @@
+# Puts the website's pages for a new app version live, after that version is out.
+#
+# The pages wait on a branch (PAGES_BRANCH). This job merges the branch into
+# main, which Vercel then deploys, but only once the app's release is public:
+# it asks the releases repo for the newest version and does nothing until that
+# is VERSION. The release itself is made public by a scheduled job in the
+# releases repo (publish-draft.yml).
+#
+# Set for: version 2.8.0, released at 00:00 on 20 Nov 2026, India time (18:30
+# UTC on 19 Nov). It is asked for several times after that, because GitHub
+# starts scheduled jobs late and sometimes skips one (see sync-downloads.yml),
+# and it does nothing once the branch is merged.
+name: Release pages
+
+on:
+  schedule:
+    - cron: "41,51 18 19 11 *"
+    - cron: "1,11,21,41 19 19 11 *"
+    - cron: "11,41 20 19 11 *"
+    - cron: "21 22 19 11 *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-pages
+  cancel-in-progress: false
+
+env:
+  VERSION: "2.8.0"
+  PAGES_BRANCH: "release-2.8"
+  RELEASES_REPO: "4bhimxnyu/Ancesra-releases"
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Merge the pages, if the release is out
+        run: |
+          latest=$(curl -fsS -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$RELEASES_REPO/releases/latest" | python3 -c "import json,sys; print(json.load(sys.stdin).get('tag_name',''))" || true)
+          if [ "$latest" != "v$VERSION" ]; then
+            echo "The newest release is '$latest', not v$VERSION yet: nothing done."
+            exit 0
+          fi
+          if ! git fetch -q origin "$PAGES_BRANCH"; then
+            echo "No branch $PAGES_BRANCH: nothing to merge."
+            exit 0
+          fi
+          if git merge-base --is-ancestor FETCH_HEAD HEAD; then
+            echo "$PAGES_BRANCH is already in main."
+            exit 0
+          fi
+          git config user.name "ancesra release"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git merge --no-ff FETCH_HEAD -m "Version $VERSION on the site (released)"
+          git push origin main
