@@ -14,7 +14,8 @@ const JOURNEY = [
   ["27 Oct 2026", "v2.3", "knows 2026", "a built-in Wikipedia pack for recent events. 2026 questions went from 0% to 86% correct, still offline."],
   ["29 Oct 2026", "v2.4", "it gets to know you", "a welcome tour, a profile with stats, and memory that asks before saving anything."],
   ["9 Nov 2026", "v2.5–2.6", "my files, and a new name", "answers from your own pdfs and notes. nexus became ancesra ai, with a new look."],
-  ["16 Nov 2026", "v2.7", "a screen for each job", "chat, code and debug each get their own screen and colour, and ancesra opens the right one for you. a new light theme, too."]
+  ["16 Nov 2026", "v2.7", "a screen for each job", "chat, code and debug each get their own screen and colour, and ancesra opens the right one for you. a new light theme, too."],
+  ["20 Nov 2026", "v2.8", "it listens and talks", "voice in and out, dictation into any program, a quick-ask bar, timers and reminders done by the app itself, and answers about three times faster."]
 ];
 
 const VALUES = [

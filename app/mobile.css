@@ -200,3 +200,6 @@
   .mobile-menu a { animation: none; }
   .menu-toggle span { transition: none; }
 }
+
+/* The phone-only "send the link to your laptop" line sits under the buttons, not on them (mobile.css pulls it up for the old hero) */
+.h28-copy .send-laptop { margin-top: 14px; }
