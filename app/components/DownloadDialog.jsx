@@ -35,6 +35,10 @@ export default function DownloadDialog({ mail }) {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [url, setUrl] = useState(null);
+  // The button is also the status (the chip): idle | running | done | error, with a clock while it sends
+  const [chip, setChip] = useState("idle");
+  const [sendingTo, setSendingTo] = useState("");
+  const [ms, setMs] = useState(0);
 
   useEffect(() => {
     const open = () => {
@@ -42,6 +46,7 @@ export default function DownloadDialog({ mail }) {
       if (d && !d.open) {
         setState("form");
         setError(null);
+        setChip("idle");
         d.showModal();
       }
     };
@@ -67,6 +72,11 @@ export default function DownloadDialog({ mail }) {
     const form = new FormData(e.currentTarget);
     setState("sending");
     setError(null);
+    setSendingTo(String(form.get("email") || "").trim());
+    setChip("running");
+    const started = performance.now();
+    setMs(0);
+    const clock = setInterval(() => setMs(performance.now() - started), 60);
     try {
       const res = await fetch("/download", {
         method: "POST",
@@ -76,6 +86,11 @@ export default function DownloadDialog({ mail }) {
       const data = await res.json();
       if (!data.ok) throw new Error(data.error || "later");
       setEmail(String(form.get("email")).trim());
+      // The chip shows that it landed (the tick, the green wash) before the dialog moves on
+      clearInterval(clock);
+      setMs(performance.now() - started);
+      setChip("done");
+      await new Promise((r) => setTimeout(r, 900));
       if (data.mode === "direct" && data.url) {
         setUrl(data.url);
         setState("direct");
@@ -85,6 +100,9 @@ export default function DownloadDialog({ mail }) {
         setState("emailed");
       }
     } catch (err) {
+      clearInterval(clock);
+      setMs(performance.now() - started);
+      setChip("error");
       setError(ERRORS[err.message] ? err.message : "later");
       setState("form");
     }
@@ -108,7 +126,7 @@ export default function DownloadDialog({ mail }) {
             <span className="dl-tick" aria-hidden="true">✓</span>
             <h2 id="dl-title">check your inbox</h2>
             <p>we sent the download link to <b>{email}</b>. it should arrive within a minute. not there? look in spam or promotions.</p>
-            <button className="text-link dl-again" type="button" onClick={() => setState("form")}>use a different email</button>
+            <button className="text-link dl-again" type="button" onClick={() => { setChip("idle"); setState("form"); }}>use a different email</button>
           </div>
         ) : state === "direct" ? (
           <div className="dl-done" role="status">
@@ -139,9 +157,26 @@ export default function DownloadDialog({ mail }) {
                 <input id="dl-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
               </div>
 
-              <button className={mail ? "pill" : "pill is-download"} type="submit" disabled={state === "sending"}>
-                {state === "sending" ? "one moment…" : mail ? "email me the link" : "download for windows"}
-                <span className="pill-arrow" aria-hidden="true" />
+              {/* The button is the status: a bar fills while it sends, the icon rolls into a tick
+                  when it lands, and it shakes and becomes "try again" if it fails */}
+              <button className="dl-chip" type="submit" data-status={chip} disabled={state === "sending"} aria-busy={chip === "running" || undefined}>
+                <span className="dl-chip-fill" aria-hidden="true" />
+                <span className="dl-chip-slot" aria-hidden="true">
+                  <span className="dl-chip-glyph" data-on={chip === "idle" || chip === "running" ? "" : undefined} data-gone={chip === "done" || chip === "error" ? "" : undefined}>
+                    {mail
+                      ? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M4 7.5l8 6 8-6" /></svg>
+                      : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 4v11M7.5 11l4.5 4.5 4.5-4.5M5 20h14" /></svg>}
+                  </span>
+                  <span className="dl-chip-glyph" data-on={chip === "done" ? "" : undefined}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                  </span>
+                  <span className="dl-chip-glyph" data-on={chip === "error" ? "" : undefined}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12a8 8 0 1 1-2.6-5.9M20 4v4h-4" /></svg>
+                  </span>
+                </span>
+                <span className="dl-chip-name">{chip === "running" ? "sending" : chip === "done" ? (mail ? "sent" : "starting") : chip === "error" ? "that did not send" : mail ? "email me the link" : "download for windows"}</span>
+                <span className="dl-chip-arg">{chip === "error" ? "tap to try again" : chip === "idle" ? "" : sendingTo}</span>
+                <span className="dl-chip-timer" aria-hidden="true">{chip === "idle" ? "→" : ms < 10000 ? `${Math.round(ms)} ms` : `${(ms / 1000).toFixed(1)} s`}</span>
               </button>
             </form>
 
