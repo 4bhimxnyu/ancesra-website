@@ -32,14 +32,16 @@ function Keys({ keys }) {
 export default function Updates28() {
   return (
     <section className="section whats-new u28" id="new" aria-labelledby="new-title">
+      <div data-reveal>
       <p className="new-kicker"><b>released 20 nov 2026</b></p>
       <h2 className="section-title" id="new-title">2.8 version <span className="accent">is here</span></h2>
       <div className="features-intro">
         <p>ancesra stopped being only a chat window. it listens, talks, types into other programs, and does small jobs by itself. still offline, still on your own laptop.</p>
         <PillButton href={LINKS.download} download>get 2.8</PillButton>
       </div>
+      </div>
 
-      <div className="u28-grid">
+      <div className="u28-grid" data-reveal>
         <article className="u28-card coral wide">
           <span className="num">01</span>
           <h3>it listens. it talks.</h3>
@@ -81,7 +83,7 @@ export default function Updates28() {
           <div className="u28-art" aria-hidden="true">
             <div className="u28-said">“set a timr for 5 minuts” <em>→</em></div>
             <div className="u28-timer">
-              <div className="top"><span className="t">4:59</span><span className="l">timer · 5 minutes</span></div>
+              <div className="top"><span className="t" data-timer="299">4:59</span><span className="l">timer · 5 minutes</span></div>
               <div className="track"><b /></div>
             </div>
           </div>
@@ -92,7 +94,7 @@ export default function Updates28() {
           <h3>three times faster</h3>
           <p>the whole model now runs on a 4 gb graphics card.</p>
           <div className="u28-art u28-speed" aria-hidden="true">
-            <div className="big"><strong>47</strong><span>tokens a second</span></div>
+            <div className="big"><strong data-count="47" data-from="14">47</strong><span>tokens a second</span></div>
             <div className="bars">
               <div><b className="old" /><span>14 before</span></div>
               <div><b className="now" /><span>47 now</span></div>
@@ -101,12 +103,12 @@ export default function Updates28() {
         </article>
       </div>
 
-      <ul className="u28-also" aria-label="Also new in 2.8">
+      <ul className="u28-also" aria-label="Also new in 2.8" data-reveal>
         <li className="t" aria-hidden="true">also new</li>
         {ALSO.map((a) => <li key={a}>{a}</li>)}
       </ul>
 
-      <div className="u28-story">
+      <div className="u28-story" data-reveal>
         <h3>the story so far</h3>
         <ol>
           {STORY.map(([v, date, what, line], i) => (

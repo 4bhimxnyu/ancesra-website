@@ -2,6 +2,8 @@
 import Image from "next/image";
 import HeroApp from "./components/HeroApp";
 import Updates28 from "./components/Updates28";
+import Features from "./components/Features";
+import Motion from "./components/Motion";
 import DownloadCount from "./components/DownloadCount";
 import PillButton from "./components/PillButton";
 import SendToLaptop from "./components/SendToLaptop";
@@ -36,6 +38,8 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
+      {/* The movement of the page that needs a script; it draws nothing (Motion.jsx) */}
+      <Motion />
 
       <main id="main">
         {/* Hero: the headline on the left, the app drawn on the right (HeroApp.jsx) */}
@@ -62,7 +66,7 @@ export default function Home() {
 
             <ul className="h28-facts">
               <li><DownloadCount big every={15}>downloads so far</DownloadCount></li>
-              <li><strong>100%</strong><span>offline, always</span></li>
+              <li><strong data-count="100" data-suffix="%">100%</strong><span>offline, always</span></li>
               <li><strong>0</strong><span>chats sent. ever.</span></li>
             </ul>
           </div>
@@ -81,6 +85,9 @@ export default function Home() {
 
         {/* Version 2.8: the big changes, the small ones, and the story so far (Updates28.jsx) */}
         <Updates28 />
+
+        {/* Every feature, in one endless row (Features.jsx) */}
+        <Features />
 
         {/* The vibe */}
         <section className="section about" id="about" aria-labelledby="about-title">

@@ -842,3 +842,169 @@ p { margin: 0; }
   .u28-card { padding: 22px; border-radius: 22px; }
   .u28-card h3 { font-size: 26px; line-height: 30px; }
 }
+
+/* ==========================================================================
+   All features row (Features.jsx, with the React Bits Flex Carousel)
+   ========================================================================== */
+.f13 { padding-left: 0; padding-right: 0; overflow: hidden; }
+.f13-head { padding: 0 var(--pad); }
+.f13-head .section-title { margin-bottom: 14px; }
+.f13-intro { max-width: 560px; font-size: 16px; line-height: 25px; color: var(--muted); }
+.f13-stage { height: 600px; margin-top: 28px; }
+.f13-stage .flex-carousel__title { font-size: 20px; text-transform: none; }
+.f13-stage .flex-carousel__subtitle { font-size: 15px; }
+.f13-hint { margin-top: 6px; text-align: center; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); opacity: .7; }
+/* the same thirteen things as text, for screen readers and search engines */
+.f13-list { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+@media (max-width: 720px) { .f13-stage { height: 480px; } }
+
+/* ==========================================================================
+   Home page motion. Figma frame "Download · submit chip, and home page motion".
+   Movement and fading only, so phones stay smooth. Everything is shown still
+   when the system asks for reduced motion (the block at the end), and nothing
+   is hidden unless Motion.jsx is running (html.motion-on).
+   ========================================================================== */
+
+/* ---- on load: the top of the page arrives ---- */
+@keyframes m-drop { 0% { opacity: 0; transform: translateY(-18px) scale(.94); } 60% { opacity: 1; transform: translateY(3px) scale(1.02); } 100% { opacity: 1; transform: none; } }
+@keyframes m-rise { 0% { opacity: 0; transform: translateY(46%) rotate(2deg); } 62% { opacity: 1; transform: translateY(-4%) rotate(0); } 100% { opacity: 1; transform: none; } }
+@keyframes m-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes m-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes m-nudge { 0%, 78%, 100% { transform: translateX(0); } 86% { transform: translateX(5px); } 93% { transform: translateX(0); } }
+@keyframes m-wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-2deg); } 75% { transform: rotate(2deg); } }
+@keyframes m-pop { 0% { opacity: 0; transform: scale(.6); } 70% { opacity: 1; transform: scale(1.07); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes m-jiggle { 0%, 100% { transform: rotate(0) scale(1); } 30% { transform: rotate(-3deg) scale(1.04); } 70% { transform: rotate(3deg) scale(1.04); } }
+@keyframes m-voice { 0%, 100% { transform: scaleY(.45); } 50% { transform: scaleY(1.15); } }
+@keyframes m-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes m-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 90, 60, .55); } 60% { box-shadow: 0 0 0 9px rgba(239, 90, 60, 0); } }
+@keyframes m-think { 0%, 80%, 100% { opacity: .25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+@keyframes m-caret { 50% { opacity: 0; } }
+
+.h28-copy .announce { animation: m-drop .7s var(--ease) both; }
+.h28-copy .announce i { display: inline-block; animation: m-nudge 4s ease-in-out 1.6s infinite; }
+.h28-copy .announce:hover { animation: m-wiggle .4s ease-in-out; }
+.h28-title span { animation: m-rise .8s var(--ease) both; transform-origin: left bottom; }
+.h28-title span:nth-child(1) { animation-delay: .1s; }
+.h28-title span:nth-child(2) { animation-delay: .22s; }
+.h28-title span:nth-child(3) { animation-delay: .34s; }
+/* "no problem." gets an underline that draws itself */
+.h28-title .accent { position: relative; width: fit-content; }
+.h28-title .accent::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.04em; height: .045em; background: var(--accent); border-radius: 99px; transform-origin: left center; animation: m-draw .5s var(--ease) .95s both; }
+.h28-lead { animation: m-up .6s var(--ease) .5s both; }
+.h28-copy .buttons { animation: m-up .6s var(--ease) .62s both; }
+.h28-facts { animation: m-up .6s var(--ease) .74s both; }
+.h28-stage { animation: m-up .9s var(--ease) .3s both; }
+
+/* buttons squash when pressed; the arrow circle turns on hover */
+.pill { transition: transform .18s var(--ease), background-color .2s, color .2s, border-color .2s, box-shadow .2s; }
+.pill:active { transform: scale(.95); }
+.pill:not(.is-download):hover .pill-arrow, .pill:not(.is-download):focus-visible .pill-arrow { transform: translateX(4px) rotate(-45deg); }
+
+/* the drawn app: leans toward the pointer (Motion.jsx sets --rx / --ry), and its parts move */
+.h28-stage { perspective: 1400px; }
+.h28-app { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .35s var(--ease); will-change: transform; }
+.h28-float { transition: scale .25s var(--ease); }
+.h28-float:hover { scale: 1.06; }
+.h28-dict .bars b { transform-origin: center; animation: m-voice .9s ease-in-out infinite; }
+.h28-dict .bars b:nth-child(2) { animation-delay: -.2s; } .h28-dict .bars b:nth-child(3) { animation-delay: -.45s; }
+.h28-dict .bars b:nth-child(4) { animation-delay: -.1s; } .h28-dict .bars b:nth-child(5) { animation-delay: -.6s; } .h28-dict .bars b:nth-child(6) { animation-delay: -.3s; }
+.h28-q.writing::after { content: ""; display: inline-block; width: 2px; height: 14px; margin-left: 2px; vertical-align: -2px; background: #f4f1ee; animation: m-caret .8s steps(1) infinite; }
+.h28-line { animation: m-up .4s var(--ease) both; }
+.h28-think { display: flex; gap: 5px; padding: 6px 2px; }
+.h28-think i { width: 6px; height: 6px; background: #8e8884; border-radius: 50%; animation: m-think 1s ease-in-out infinite; }
+.h28-think i:nth-child(2) { animation-delay: .15s; } .h28-think i:nth-child(3) { animation-delay: .3s; }
+
+/* ---- into view (Motion.jsx adds .is-in) ---- */
+.motion-on [data-reveal] { transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.motion-on [data-reveal]:not(.is-in) { opacity: 0; transform: translateY(26px); }
+/* the coral word of a title slides up from behind a mask */
+.motion-on [data-reveal] .section-title .accent, .motion-on .section-title[data-reveal] .accent { display: inline-block; transition: transform .55s var(--ease) .12s, opacity .4s ease .12s; }
+.motion-on [data-reveal]:not(.is-in) .section-title .accent, .motion-on .section-title[data-reveal]:not(.is-in) .accent { opacity: 0; transform: translateY(60%); }
+
+/* the 2.8 cards rise one after another, and tilt under the pointer */
+.motion-on .u28-grid .u28-card { transition: opacity .6s var(--ease), transform .6s var(--ease), border-color .3s; }
+.motion-on .u28-grid[data-reveal]:not(.is-in) { opacity: 1; transform: none; }
+.motion-on .u28-grid[data-reveal]:not(.is-in) .u28-card { opacity: 0; transform: translateY(34px) rotate(1.5deg); }
+.u28-grid .u28-card:nth-child(2) { transition-delay: .08s; } .u28-grid .u28-card:nth-child(3) { transition-delay: .16s; }
+.u28-grid .u28-card:nth-child(4) { transition-delay: .24s; } .u28-grid .u28-card:nth-child(5) { transition-delay: .32s; }
+.u28-grid.is-in .u28-card:hover { transition-delay: 0s; transform: translateY(-6px) rotate(-.6deg); }
+/* each drawing plays once its card is in view */
+.u28-wave b { transform-origin: center; }
+.u28-grid.is-in .u28-wave b { animation: m-voice 1s ease-in-out infinite; }
+.u28-grid.is-in .u28-wave b:nth-child(3n) { animation-delay: -.35s; } .u28-grid.is-in .u28-wave b:nth-child(3n+1) { animation-delay: -.6s; } .u28-grid.is-in .u28-wave b:nth-child(4n) { animation-delay: -.15s; }
+.motion-on .u28-timer .track b { transform-origin: left center; }
+.motion-on .u28-grid.is-in .u28-timer .track b { animation: m-draw 1.2s var(--ease) .3s both; }
+.motion-on .u28-speed .bars b { transform-origin: left center; transform: scaleX(0); transition: transform 1s var(--ease) .3s; }
+.motion-on .u28-grid.is-in .u28-speed .bars b { transform: scaleX(1); }
+.motion-on .u28-chips span { opacity: 0; }
+.motion-on .u28-grid.is-in .u28-chips span { animation: m-pop .4s var(--ease) both; }
+.u28-chips span:nth-child(1) { animation-delay: .5s !important; } .u28-chips span:nth-child(2) { animation-delay: .6s !important; }
+.u28-chips span:nth-child(3) { animation-delay: .7s !important; } .u28-chips span:nth-child(4) { animation-delay: .8s !important; }
+
+/* "also new" tags pop in like bubbles, and jiggle under the pointer */
+.motion-on .u28-also[data-reveal]:not(.is-in) { opacity: 1; transform: none; }
+.motion-on .u28-also:not(.is-in) li { opacity: 0; }
+.motion-on .u28-also.is-in li { animation: m-pop .42s var(--ease) both; }
+.u28-also li:nth-child(2) { animation-delay: .05s; } .u28-also li:nth-child(3) { animation-delay: .1s; } .u28-also li:nth-child(4) { animation-delay: .15s; }
+.u28-also li:nth-child(5) { animation-delay: .2s; } .u28-also li:nth-child(6) { animation-delay: .25s; } .u28-also li:nth-child(7) { animation-delay: .3s; }
+.u28-also li:nth-child(8) { animation-delay: .35s; } .u28-also li:nth-child(9) { animation-delay: .4s; }
+.u28-also li:not(.t):hover { animation: m-jiggle .4s ease-in-out; }
+
+/* the story so far: the line draws itself, each dot lights as the line reaches it, 2.8 pulses */
+.u28-story ol { position: relative; }
+.motion-on .u28-story ol { border-top-color: transparent; }
+.motion-on .u28-story ol::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: rgba(var(--text-rgb), .3); transform: scaleX(0); transform-origin: left center; transition: transform 1.6s var(--ease); }
+.motion-on .u28-story.is-in ol::before { transform: scaleX(1); }
+.motion-on .u28-story[data-reveal]:not(.is-in) { opacity: 1; transform: none; }
+.motion-on .u28-story li { transition: opacity .5s var(--ease), transform .5s var(--ease); }
+.motion-on .u28-story:not(.is-in) li { opacity: 0; transform: translateY(12px); }
+.u28-story li:nth-child(1) { transition-delay: .05s; } .u28-story li:nth-child(2) { transition-delay: .27s; } .u28-story li:nth-child(3) { transition-delay: .49s; }
+.u28-story li:nth-child(4) { transition-delay: .71s; } .u28-story li:nth-child(5) { transition-delay: .93s; } .u28-story li:nth-child(6) { transition-delay: 1.15s; }
+.u28-story li:nth-child(7) { transition-delay: 1.37s; }
+.motion-on .u28-story.is-in li.now::before { animation: m-pulse 1.8s ease-out 1.8s infinite; }
+
+/* ---- narrow screens: the story is a column, so the line is the border again ---- */
+@media (max-width: 1100px) {
+  .motion-on .u28-story ol { border-top-color: transparent; }
+  .motion-on .u28-story ol::before { display: none; }
+}
+
+/* ==========================================================================
+   The download button as a status chip (DownloadDialog.jsx), after the React
+   Bits "Call Chip": a bar fills while it sends, the icon rolls into a tick
+   when it lands, and it shakes and offers a retry if it fails.
+   ========================================================================== */
+@keyframes chip-shake { 0%, 100% { transform: translateX(0); } 16% { transform: translateX(-6px); } 33% { transform: translateX(6px); } 50% { transform: translateX(-4px); } 66% { transform: translateX(4px); } 83% { transform: translateX(-2px); } }
+.dl-chip { --chip-done: #34c77b; position: relative; display: flex; align-items: center; gap: 10px; width: 100%; height: 50px; margin-top: 6px; padding: 0 18px; font: inherit; font-size: 16px; font-weight: 500; color: var(--bg); background: var(--text); border: 1px solid var(--text); border-radius: 16px; overflow: hidden; cursor: pointer; text-align: left; white-space: nowrap; transition: transform .16s cubic-bezier(.23, 1, .32, 1), background-color .25s, color .25s, border-color .25s; }
+.dl-chip:active { transform: scale(.97); }
+.dl-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.dl-chip[data-status="running"], .dl-chip[data-status="done"], .dl-chip[data-status="error"] { color: var(--text); background: rgba(var(--text-rgb), .07); border-color: rgba(var(--text-rgb), .16); }
+.dl-chip[data-status="running"] { cursor: progress; }
+.dl-chip[data-status="done"] { border-color: color-mix(in srgb, var(--chip-done) 55%, transparent); }
+.dl-chip[data-status="error"] { border-color: rgba(239, 90, 60, .6); animation: chip-shake .45s cubic-bezier(.77, 0, .175, 1); }
+.dl-chip-fill { position: absolute; inset: 0; background: rgba(var(--text-rgb), .1); transform: scaleX(0); transform-origin: left center; pointer-events: none; }
+.dl-chip[data-status="running"] .dl-chip-fill { transform: scaleX(.9); transition: transform 2.6s cubic-bezier(.2, .6, .3, 1); }
+.dl-chip[data-status="done"] .dl-chip-fill { transform: scaleX(1); background: color-mix(in srgb, var(--chip-done) 18%, transparent); clip-path: inset(100% 0 0 0); transition: transform .2s cubic-bezier(.23, 1, .32, 1), background-color .12s ease, clip-path .4s cubic-bezier(.23, 1, .32, 1) .45s; }
+.dl-chip[data-status="error"] .dl-chip-fill { transform: scaleX(.9); background: rgba(239, 90, 60, .18); }
+.dl-chip-slot { position: relative; flex: none; width: 20px; height: 20px; overflow: hidden; }
+.dl-chip-glyph { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transform: translateY(70%); filter: blur(3px); transition: opacity .2s cubic-bezier(.23, 1, .32, 1), transform .2s cubic-bezier(.23, 1, .32, 1), filter .2s cubic-bezier(.23, 1, .32, 1); }
+.dl-chip-glyph svg { width: 18px; height: 18px; }
+.dl-chip-glyph[data-on] { opacity: 1; transform: none; filter: blur(0); }
+.dl-chip-glyph[data-gone] { transform: translateY(-70%); }
+.dl-chip[data-status="done"] .dl-chip-glyph[data-on] { color: var(--chip-done); }
+.dl-chip[data-status="error"] .dl-chip-glyph[data-on] { color: var(--accent); }
+.dl-chip-name { position: relative; }
+.dl-chip-arg { position: relative; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; font-weight: 400; opacity: .7; }
+.dl-chip-timer { position: relative; min-width: 5ch; font-size: 13px; font-variant-numeric: tabular-nums; text-align: right; opacity: .55; }
+.dl-chip[data-status="idle"] .dl-chip-timer { font-size: 18px; opacity: 1; transition: transform .2s var(--ease); }
+.dl-chip[data-status="idle"]:hover .dl-chip-timer { transform: translateX(4px); }
+
+/* ---- reduced motion: everything still ---- */
+@media (prefers-reduced-motion: reduce) {
+  .h28-copy .announce, .h28-copy .announce i, .h28-title span, .h28-title .accent::after, .h28-lead, .h28-copy .buttons, .h28-facts, .h28-stage,
+  .h28-dict .bars b, .h28-line, .h28-think i, .h28-q.writing::after, .dl-chip[data-status="error"] { animation: none; }
+  .h28-app { transform: none; }
+  .pill:active, .dl-chip:active { transform: none; }
+  .dl-chip-glyph { transform: none !important; filter: none !important; }
+  .dl-chip[data-status="done"] .dl-chip-fill { clip-path: inset(0 0 0 0); }
+}
