@@ -3,8 +3,11 @@
 // Flex Carousel from React Bits (https://reactbits.dev/components/flex-carousel),
 // copyright (c) 2026 David Haz, used under its MIT + Commons Clause licence
 // (free to use as part of a website; the component itself may not be sold or
-// redistributed on its own). Unchanged apart from the built-in demo pictures,
-// which are removed: an endless row of pictures, drawn with WebGL (the "ogl"
+// redistributed on its own). Two changes for this page: the built-in demo
+// pictures are removed, and it takes two more options, `controlRef` (the page
+// can tell it which picture to go to: the row follows the page's scroll) and
+// `wheel={false}` (it never takes the mouse wheel or a trackpad swipe, which
+// held the page still while the pointer was over it). It is an endless row of pictures, drawn with WebGL (the "ogl"
 // package), that drifts, can be dragged, and bends through a glass lens at
 // each edge.
 import { useEffect, useRef, useState } from 'react';
@@ -253,6 +256,8 @@ const FlexCarousel = ({
   interval = 4,
   captions = true,
   captureWheel = true,
+  wheel = true,
+  controlRef,
   onChange,
   onSelect,
   className = '',
@@ -296,7 +301,8 @@ const FlexCarousel = ({
       focusOnClick,
       autoplay,
       interval,
-      captureWheel
+      captureWheel,
+      wheel
     };
     engineRef.current?.wake();
   });
@@ -1098,7 +1104,7 @@ const FlexCarousel = ({
 
     const onWheel = e => {
       const s = settingsRef.current;
-      if (!s || e.ctrlKey) return;
+      if (!s || e.ctrlKey || s.wheel === false) return;
       let dx = e.deltaX;
       let dy = e.deltaY;
       if (e.shiftKey && Math.abs(dx) < Math.abs(dy)) {
@@ -1189,6 +1195,18 @@ const FlexCarousel = ({
       },
       setItems
     };
+    // For the page: go to picture number `index` (0 is the first)
+    if (controlRef) {
+      controlRef.current = {
+        goTo: index => {
+          const settings = settingsRef.current;
+          if (!settings || !slots.length) return;
+          skipIntro();
+          closeFocus();
+          goTo(metrics(settings), index);
+        }
+      };
+    }
 
     resize();
     setItems(itemsRef.current);
