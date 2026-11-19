@@ -1,6 +1,7 @@
 // The ancesra ai landing page, from the Figma "Landing — v2 (editorial)" frame.
 import Image from "next/image";
-import OfflineToggle from "./components/OfflineToggle";
+import HeroApp from "./components/HeroApp";
+import Updates28 from "./components/Updates28";
 import DownloadCount from "./components/DownloadCount";
 import PillButton from "./components/PillButton";
 import SendToLaptop from "./components/SendToLaptop";
@@ -8,23 +9,6 @@ import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 import { LINKS } from "@/lib/links";
 
 const MARQUEE = ["works offline", "zero cloud", "free forever", "your files stay yours", "no account", "runs on your laptop"];
-
-// What changed in version 2.8 (from the app's CHANGELOG)
-const NEW_28 = [
-  { cls: "new-chat", title: "talk", text: "press the mic and speak. listen to any answer in a natural voice, or switch to talk mode for a spoken conversation. your voice never leaves your laptop." },
-  { cls: "new-code", title: "anywhere", text: "ctrl+alt+space types what you say into any program. alt+space opens a small ancesra bar over whatever you're working on." },
-  { cls: "new-debug", title: "faster", text: "about three times faster answers on a 4 gb graphics card. timers, reminders, sums and “open spotify” happen at once, done by the app itself." }
-];
-
-// What changed in version 2.7, with real screenshots
-const NEW_27 = [
-  { cls: "new-chat", title: "chat", text: "one calm reading column. think it through in plain words.",
-    img: "/assets/v27-chat.jpg", alt: "Ancesra 2.7 in Chat: a question and a short answer in one reading column" },
-  { cls: "new-code", title: "code", text: "the chat stays on the left. the code opens in its own panel on the right, ready to copy or save.",
-    img: "/assets/v27-code.jpg", alt: "Ancesra 2.7 in Code: the conversation on the left and the code in a panel on the right" },
-  { cls: "new-debug", title: "debug", text: "paste what's broken. the line to change gets marked, and the fix is explained step by step.",
-    img: "/assets/v27-debug.jpg", alt: "Ancesra 2.7 in Debug: the pasted code with line 3 marked and numbered cards explaining the fix" }
-];
 
 const STATS = [
   ["100%", "offline, always"],
@@ -54,42 +38,36 @@ export default function Home() {
       <SiteHeader />
 
       <main id="main">
-        {/* Hero */}
-        <section className="hero" aria-labelledby="hero-title">
-          <div className="hero-art" aria-hidden="true">
-            <img className="halo" src="/assets/halo.svg" alt="" />
-            <div className="blob blob-hero" />
-          </div>
+        {/* Hero: the headline on the left, the app drawn on the right (HeroApp.jsx) */}
+        <section className="hero h28" aria-labelledby="hero-title">
+          <div className="h28-copy">
+            <a className="announce" href="#new">
+              <b>new</b>
+              <span>version 2.8 is here</span>
+              <i aria-hidden="true">→</i>
+            </a>
 
-          <a className="announce" href="#new">
-            <b>new</b>
-            <span>version 2.8 is here</span>
-            <i aria-hidden="true">→</i>
-          </a>
+            <h1 className="h28-title" id="hero-title">
+              <span>no signal.</span>
+              <span>no cloud.</span>
+              <span className="accent">no problem.</span>
+            </h1>
 
-          <h1 className="headline" id="hero-title">
-            <span>no signal.</span>
-            <span className="center">no cloud.</span>
-            <span className="accent right">no problem.</span>
-          </h1>
-
-          <ul className="chips" aria-label="Things you can ask">
-            <li className="chip chip-1"><span className="dot" />fix my word_count bug</li>
-            <li className="chip chip-2"><span className="dot" />when&apos;s my midterm?</li>
-            <li className="chip chip-3"><span className="dot" />explain hash maps, fast</li>
-          </ul>
-
-          <OfflineToggle />
-
-          <div className="hero-bottom">
-            <p>stuck in traffic. power cut. hostel wifi dead again. still need ai? ancesra runs 100% on your laptop. ask it anything, get your code fixed, read your own notes. your chats and files never leave your machine. fr.</p>
+            <p className="h28-lead">ancesra is an ai assistant that runs <b>100% on your laptop</b>. ask it anything, talk to it, get your code fixed, read your own notes. your chats, files and voice never leave your machine.</p>
             <div className="buttons">
               <PillButton href={LINKS.download} download>get it for windows</PillButton>
               <PillButton href="#features" outline>how it works</PillButton>
             </div>
             <SendToLaptop />
-            <DownloadCount big every={15}>downloads so far</DownloadCount>
+
+            <ul className="h28-facts">
+              <li><DownloadCount big every={15}>downloads so far</DownloadCount></li>
+              <li><strong>100%</strong><span>offline, always</span></li>
+              <li><strong>0</strong><span>chats sent. ever.</span></li>
+            </ul>
           </div>
+
+          <HeroApp />
         </section>
 
         {/* Marquee: the list twice, so the scroll loops seamlessly */}
@@ -101,34 +79,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Version 2.8, and under it the screens that came with 2.7 */}
-        <section className="section whats-new" id="new" aria-labelledby="new-title">
-          <p className="new-kicker"><b>released 20 nov 2026</b></p>
-          <h2 className="section-title" id="new-title">2.8 version <span className="accent">is here</span></h2>
-          <div className="features-intro">
-            <p>ancesra now listens and talks. speak your question, hear the answer, and dictate into any program. it sets timers and reminders, does sums and opens your apps by itself. all of it still offline, on your own laptop.</p>
-            <PillButton href={LINKS.download} download>get 2.8</PillButton>
-          </div>
-          <div className="new-grid">
-            {NEW_28.map((n) => (
-              <article key={n.title} className={`new-card new-text ${n.cls}`}>
-                <h3>{n.title}</h3>
-                <p>{n.text}</p>
-              </article>
-            ))}
-          </div>
-          <p className="new-note new-from">from 2.7: a screen for each job</p>
-          <div className="new-grid">
-            {NEW_27.map((n) => (
-              <article key={n.title} className={`new-card ${n.cls}`}>
-                <Image src={n.img} width={1600} height={900} alt={n.alt} sizes="(max-width: 720px) 100vw, 33vw" />
-                <h3>{n.title}</h3>
-                <p>{n.text}</p>
-              </article>
-            ))}
-          </div>
-          <p className="new-note">already on 2.7? open ancesra with the internet on and it offers the update.</p>
-        </section>
+        {/* Version 2.8: the big changes, the small ones, and the story so far (Updates28.jsx) */}
+        <Updates28 />
 
         {/* The vibe */}
         <section className="section about" id="about" aria-labelledby="about-title">
