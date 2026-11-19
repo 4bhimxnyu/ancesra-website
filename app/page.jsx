@@ -9,7 +9,14 @@ import { LINKS } from "@/lib/links";
 
 const MARQUEE = ["works offline", "zero cloud", "free forever", "your files stay yours", "no account", "runs on your laptop"];
 
-// What changed in version 2.7 (from the app's CHANGELOG), with real screenshots
+// What changed in version 2.8 (from the app's CHANGELOG)
+const NEW_28 = [
+  { cls: "new-chat", title: "talk", text: "press the mic and speak. listen to any answer in a natural voice, or switch to talk mode for a spoken conversation. your voice never leaves your laptop." },
+  { cls: "new-code", title: "anywhere", text: "ctrl+alt+space types what you say into any program. alt+space opens a small ancesra bar over whatever you're working on." },
+  { cls: "new-debug", title: "faster", text: "about three times faster answers on a 4 gb graphics card. timers, reminders, sums and “open spotify” happen at once, done by the app itself." }
+];
+
+// What changed in version 2.7, with real screenshots
 const NEW_27 = [
   { cls: "new-chat", title: "chat", text: "one calm reading column. think it through in plain words.",
     img: "/assets/v27-chat.jpg", alt: "Ancesra 2.7 in Chat: a question and a short answer in one reading column" },
@@ -27,7 +34,7 @@ const STATS = [
 
 // The four cards with an app preview (exported from Figma); the fifth is "private"
 const CARDS = [
-  { cls: "card-chat", num: "01", title: "chat", text: "ask literally anything. answer first, key points after, zero yapping. it knows 2024–2026 stuff too, with sources, offline.",
+  { cls: "card-chat", num: "01", title: "chat", text: "ask literally anything. answer first, key points after, zero yapping. it knows 2022–2026 stuff too, with sources, offline.",
     img: "/assets/preview-chat.png", w: 812, h: 330, alt: "Ancesra chat answering “Why is Python so popular?” with key points and a Wikipedia source" },
   { cls: "card-code", num: "02", title: "code", text: "say the function name and language. approach, full code, time + space complexity. in 2.7 the code opens in its own panel.",
     img: "/assets/preview-code.png", w: 388, h: 330, alt: "Ancesra writing reverse_list(head) in Python with its time and space complexity" },
@@ -56,7 +63,7 @@ export default function Home() {
 
           <a className="announce" href="#new">
             <b>new</b>
-            <span>version 2.7 is here</span>
+            <span>version 2.8 is here</span>
             <i aria-hidden="true">→</i>
           </a>
 
@@ -94,14 +101,23 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Version 2.7 */}
+        {/* Version 2.8, and under it the screens that came with 2.7 */}
         <section className="section whats-new" id="new" aria-labelledby="new-title">
-          <p className="new-kicker"><b>released 16 nov 2026</b></p>
-          <h2 className="section-title" id="new-title">2.7 version <span className="accent">is here</span></h2>
+          <p className="new-kicker"><b>released 20 nov 2026</b></p>
+          <h2 className="section-title" id="new-title">2.8 version <span className="accent">is here</span></h2>
           <div className="features-intro">
-            <p>the biggest update yet. chat, code and debug each get their own screen and colour, and you don&apos;t have to pick one: ancesra reads your message and opens the right screen. plus a new light theme and buttons you can feel.</p>
-            <PillButton href={LINKS.download} download>get 2.7</PillButton>
+            <p>ancesra now listens and talks. speak your question, hear the answer, and dictate into any program. it sets timers and reminders, does sums and opens your apps by itself. all of it still offline, on your own laptop.</p>
+            <PillButton href={LINKS.download} download>get 2.8</PillButton>
           </div>
+          <div className="new-grid">
+            {NEW_28.map((n) => (
+              <article key={n.title} className={`new-card new-text ${n.cls}`}>
+                <h3>{n.title}</h3>
+                <p>{n.text}</p>
+              </article>
+            ))}
+          </div>
+          <p className="new-note new-from">from 2.7: a screen for each job</p>
           <div className="new-grid">
             {NEW_27.map((n) => (
               <article key={n.title} className={`new-card ${n.cls}`}>
@@ -111,7 +127,7 @@ export default function Home() {
               </article>
             ))}
           </div>
-          <p className="new-note">already on 2.6? open ancesra with the internet on and it offers the update.</p>
+          <p className="new-note">already on 2.7? open ancesra with the internet on and it offers the update.</p>
         </section>
 
         {/* The vibe */}
